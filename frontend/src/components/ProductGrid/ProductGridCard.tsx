@@ -3,6 +3,7 @@ import type { Product } from "@/types/product";
 import { calculateDiscount, formatPrice } from "@/utils/price";
 import toast from "react-hot-toast";
 import { Link } from "react-router";
+import { useCallback } from "react";
 import { getImage } from "../../lib/assets";
 
 type ProductGridCardProps = {
@@ -23,14 +24,17 @@ const ProductGridCard = ({ href, product }: ProductGridCardProps) => {
     }
   };
 
-  const handleAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (href) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    addItem(product);
-    toast.success(`${name} added to cart!`);
-  };
+  const handleAddToCart = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (href) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      addItem(product);
+      toast.success(`${product.name} added to cart!`);
+    },
+    [href, product, addItem],
+  );
 
   const { image, discount, name, isNew, description } = product;
   const offer = discount > 0;

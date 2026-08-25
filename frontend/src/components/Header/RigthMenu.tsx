@@ -1,22 +1,24 @@
 import clsx from "clsx";
 import { Link, useNavigate } from "react-router";
-import { useCartStore } from "../../stores/cart.store";
 import { useState } from "react";
-import { FiUser, FiLogOut } from "react-icons/fi";
-import toast from "react-hot-toast";
-
+import { useCartStore } from "../../stores/cart.store";
 import { useAuthStore } from "@/stores/auth.store";
 import { authService } from "@/services/auth.service";
+import toast from "react-hot-toast";
+import { FiUser, FiLogOut } from "react-icons/fi";
+import { CartSidebar } from "../../pages/CartSideBar";
 
 type RightMenuProps = {
   className?: string;
 };
+
 const RightMenu = ({ className }: RightMenuProps) => {
   const totalItems = useCartStore((s) => s.getTotalItems());
   const { isAuthenticated, logout } = useAuthStore();
   const navigate = useNavigate();
+  const [cartOpen, setCartOpen] = useState(false);
 
-    const handleLogout = async () => {
+  const handleLogout = async () => {
     try {
       await authService.logout();
       logout();
@@ -27,10 +29,12 @@ const RightMenu = ({ className }: RightMenuProps) => {
     }
   };
 
+  const LinkHover: string =
+    "hover:cursor-pointer hover:scale-110 transition flex items-center";
 
-  const LinkHover: string = "hover:cursor-pointer hover:scale-110 transition";
   return (
-     <div className={clsx("flex gap-[33.66px]", className)}>
+    <>
+      <div className={clsx("flex gap-[33.66px]", className)}>
         {isAuthenticated ? (
           <button
             onClick={handleLogout}
@@ -46,7 +50,7 @@ const RightMenu = ({ className }: RightMenuProps) => {
         )}
 
         <button
-          onClick={() => (true)}
+          onClick={() => setCartOpen(true)}
           className={clsx(LinkHover, "relative")}
           aria-label="Open cart"
         >
@@ -71,6 +75,10 @@ const RightMenu = ({ className }: RightMenuProps) => {
           )}
         </button>
       </div>
+
+      <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+    </>
   );
 };
+
 export default RightMenu;

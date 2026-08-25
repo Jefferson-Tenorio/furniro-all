@@ -1,15 +1,17 @@
-import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 import { useCartStore } from "../../stores/cart.store";
+import toast from "react-hot-toast";
 
 export function CheckoutButton() {
-  const clear = useCartStore((s) => s.clearCart);
   const isEmpty = useCartStore((s) => s.isEmpty());
+  const navigate = useNavigate();
 
   function handleCheckout() {
-    if (isEmpty) return;
-
-    toast.success("check out realizado com sucesso!");
-    clear();
+    if (isEmpty) {
+      toast.error("Your cart is empty!");
+      return;
+    }
+    navigate("/checkout");
   }
 
   return (
