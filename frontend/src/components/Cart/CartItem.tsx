@@ -1,15 +1,16 @@
 import { formatPrice } from "@/utils/price";
 import { Link } from "react-router";
 import { getImage } from "../../lib/assets";
-import { useCartStore, type CartItem } from "../../stores/cart.store";
+import { useCartStore, type CartItem as CartItemType } from "../../stores/cart.store";
 import { QuantityInput } from "./QuantityInput";
 import { RemoveItem } from "./RemoveItem";
+import { memo } from "react";
 
 type CartItemProps = {
-  item: CartItem;
+  item: CartItemType;
 };
 
-export function CartItem({ item }: CartItemProps) {
+export const CartItem = memo(({ item }: CartItemProps) => {
   const { id, name, image, price } = item;
 
   const itemSubtotal = useCartStore((s) => s.getItemSubtotal(id));
@@ -29,4 +30,6 @@ export function CartItem({ item }: CartItemProps) {
       <RemoveItem id={id} />
     </div>
   );
-}
+});
+
+CartItem.displayName = "CartItem";
