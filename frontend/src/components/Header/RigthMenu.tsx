@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { Link, useNavigate } from "react-router";
 import { useCartStore } from "../../stores/cart.store";
-import { useState } from "react";
 import { FiUser, FiLogOut } from "react-icons/fi";
 import toast from "react-hot-toast";
 
