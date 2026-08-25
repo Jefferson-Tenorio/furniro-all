@@ -21,19 +21,33 @@
   "dependencies": {
     "@prisma/client": "^6.4.1",
     "axios": "^1.19.0",
+    "bcrypt": "^6.0.0",
     "cloudinary": "^2.10.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "express": "^5.2.1",
-    "http-status-codes": "^2.3.0"
+    "express-rate-limit": "^8.6.2",
+    "http-status-codes": "^2.3.0",
+    "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^26.1.2",
     "nodemon": "^3.1.14",
     "prisma": "^6.4.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.23.1",
     "typescript": "^5.7.3"
+  },
+  "allowScripts": {
+    "@prisma/client@6.19.3": true,
+    "@prisma/engines@6.12.0": true,
+    "bcrypt@6.0.0": true,
+    "esbuild@0.28.1": true,
+    "prisma@6.12.0": true
   }
 }
