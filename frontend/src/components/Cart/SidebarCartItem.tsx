@@ -18,34 +18,48 @@ export const SidebarCartItem = memo(({
   onRemove,
 }: SidebarCartItemProps) => {
   return (
-    <div className="flex items-center gap-4 py-4">
+    <div className="flex items-center gap-[35px] pb-[20px]">
       <img
         src={image}
         alt={name}
-        className="h-[105px] w-[108px] shrink-0 rounded-md object-cover bg-neutral-100"
+        className="h-[105px] w-[105px] shrink-0 rounded-[10px] bg-neutral-100 object-cover"
         onError={(e) => {
           (e.target as HTMLImageElement).src = "/placeholder.jpg";
         }}
       />
 
-      <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-neutral-900 truncate">{name}</p>
-        <p className="mt-1 text-sm text-neutral-400">
-          {quantity}{" "}
-          <span className="text-neutral-500 mx-1">x</span>{" "}
-          <span className="font-medium text-[#B88E2F]">{formatPrice(price)}</span>
+      <div className="flex h-[56px] w-[130px] mr-[25px] min-w-0 flex-col">
+        <p className="font-poppins h-[24px] w-[108px] truncate text-[16px] font-normal leading-[100%] tracking-[0%] text-neutral-900">
+          {name}
         </p>
+
+<div className="flex h-[24px] w-max items-center whitespace-nowrap">
+  <span className="font-poppins h-[24px] w-[5px] shrink-0 text-[16px] font-light leading-[100%] tracking-[0%] text-neutral-900">
+    {quantity}
+  </span>
+
+  <span className="font-poppins ml-[15px] mr-[15px] h-[18px] w-[8px] shrink-0 text-[12px] font-light leading-[100%] tracking-[0%] text-neutral-900">
+    X
+  </span>
+
+  <span className="font-poppins h-[18px] min-w-[87px] shrink-0 whitespace-nowrap text-[12px] font-medium leading-[100%] tracking-[0%] text-[#B88E2F]">
+    {formatPrice(price)}
+  </span>
+</div>
       </div>
 
-      <button
-        type="button"
-        onClick={onRemove}
-        aria-label={`Remove ${name}`}
-        className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full
-                   bg-neutral-900 text-white text-xs transition hover:bg-red-500"
-      >
-        <FiX size={12} />
-      </button>
+<button
+  type="button"
+  onClick={onRemove}
+  aria-label={`Remove ${name}`}
+  className="flex h-[20px] w-[20px] shrink-0 items-center justify-center transition"
+>
+  <img
+    src="/Cart/close_cart_item_list.svg"
+    alt=""
+    className="h-[20px] w-[20px]"
+  />
+</button>
     </div>
   );
 });
