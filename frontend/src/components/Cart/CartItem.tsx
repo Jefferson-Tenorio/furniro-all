@@ -19,11 +19,11 @@ export const CartItem = memo(({ item }: CartItemProps) => {
   const itemSubtotal = useCartStore((s) => s.getItemSubtotal(id));
 
   return (
-    <div className="grid grid-cols-6 min-w-200 sm:min-w-auto gap-9 mt-8 items-center">
+    <div className="mt-8 grid min-w-200 grid-cols-6 items-center gap-9 sm:min-w-auto">
       <Link to={`/product/${id}`}>
         <img
           src={getImage(image)}
-          className="w-26.25 h-26.25 object-cover rounded-[10px]"
+          className="h-26.25 w-26.25 rounded-[10px] object-cover"
         />
       </Link>
       <span className="text-footer-gray">{name}</span>

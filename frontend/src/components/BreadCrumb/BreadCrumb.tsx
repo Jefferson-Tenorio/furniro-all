@@ -12,7 +12,7 @@ const Breadcrumb = ({ category, productName, className }: BreadcrumbProps) => {
     <nav
       aria-label="Breadcrumb"
       className={clsx(
-        "flex h-[100px] w-full items-center px-4 sm:px-8 lg:px-[100px] font-poppins",
+        "flex h-[100px] w-full items-center px-4 font-poppins sm:px-8 lg:px-[100px]",
         className,
       )}
       style={{ backgroundColor: "#F9F1E7" }}
@@ -20,23 +20,23 @@ const Breadcrumb = ({ category, productName, className }: BreadcrumbProps) => {
       <ol className="flex flex-wrap items-center gap-6 text-base font-medium">
         <Link
           to="/"
-          className={"text-[#9F9F9F] font-medium hover:text-black transition"}
+          className={"font-medium text-[#9F9F9F] transition hover:text-black"}
         >
           Home
         </Link>
 
-        <li className="font-bold text-primary-black">
+        <li className="text-primary-black font-bold">
           <img src={`/Icons/breadcrumbarrow.svg`} alt="Arrow Pointing Right" />
         </li>
 
         <Link
           to={`/shop/${category.toLowerCase()}`}
-          className={"text-[#9F9F9F] hover:text-black transition"}
+          className={"text-[#9F9F9F] transition hover:text-black"}
         >
           {category}
         </Link>
 
-        <li className="font-bold text-primary-black">
+        <li className="text-primary-black font-bold">
           <img src={`/Icons/breadcrumbarrow.svg`} alt="Arrow Pointing Right" />
         </li>
 

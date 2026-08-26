@@ -22,21 +22,21 @@ export const SidebarCartItem = memo(
           }}
         />
 
-        <div className="flex h-[56px] w-[130px] mr-[25px] min-w-0 flex-col">
-          <p className="font-poppins h-[24px] w-[108px] truncate text-[16px] font-normal leading-[100%] tracking-[0%] text-neutral-900">
+        <div className="mr-[25px] flex h-[56px] w-[130px] min-w-0 flex-col">
+          <p className="h-[24px] w-[108px] truncate font-poppins text-[16px] leading-[100%] font-normal tracking-[0%] text-neutral-900">
             {name}
           </p>
 
           <div className="flex h-[24px] w-max items-center whitespace-nowrap">
-            <span className="font-poppins h-[24px] w-[5px] shrink-0 text-[16px] font-light leading-[100%] tracking-[0%] text-neutral-900">
+            <span className="h-[24px] w-[5px] shrink-0 font-poppins text-[16px] leading-[100%] font-light tracking-[0%] text-neutral-900">
               {quantity}
             </span>
 
-            <span className="font-poppins ml-[15px] mr-[15px] h-[18px] w-[8px] shrink-0 text-[12px] font-light leading-[100%] tracking-[0%] text-neutral-900">
+            <span className="mr-[15px] ml-[15px] h-[18px] w-[8px] shrink-0 font-poppins text-[12px] leading-[100%] font-light tracking-[0%] text-neutral-900">
               X
             </span>
 
-            <span className="font-poppins h-[18px] min-w-[87px] shrink-0 whitespace-nowrap text-[12px] font-medium leading-[100%] tracking-[0%] text-[#B88E2F]">
+            <span className="h-[18px] min-w-[87px] shrink-0 font-poppins text-[12px] leading-[100%] font-medium tracking-[0%] whitespace-nowrap text-[#B88E2F]">
               {formatPrice(price)}
             </span>
           </div>

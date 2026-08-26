@@ -16,7 +16,7 @@ export function CheckoutButton() {
 
   return (
     <button
-      className="w-fit text-[20px] py-3.5 px-14.5 rounded-2xl border border-black cursor-pointer transition hover:scale-102"
+      className="w-fit cursor-pointer rounded-2xl border border-black px-14.5 py-3.5 text-[20px] transition hover:scale-102"
       onClick={handleCheckout}
     >
       Checkout

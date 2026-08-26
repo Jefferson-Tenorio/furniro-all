@@ -35,7 +35,7 @@ function ContactFormField({
     <div className="w-full">
       <label
         htmlFor={name}
-        className="font-poppins mb-[22px] block text-[16px] font-medium leading-[100%] tracking-[0%] text-neutral-800"
+        className="mb-[22px] block font-poppins text-[16px] leading-[100%] font-medium tracking-[0%] text-neutral-800"
       >
         {label}
       </label>
@@ -49,12 +49,7 @@ function ContactFormField({
               {...field}
               id={name}
               placeholder={placeholder}
-              className={`font-poppins h-[75px] w-full resize-none rounded-[10px]
-                         border bg-white px-4 py-3
-                         text-[16px] font-normal leading-[100%]
-                         tracking-[0%] text-neutral-800
-                         placeholder:text-neutral-400
-                         ${error ? "border-red-500" : "border-[#9F9F9F]"}`}
+              className={`h-[75px] w-full resize-none rounded-[10px] border bg-white px-4 py-3 font-poppins text-[16px] leading-[100%] font-normal tracking-[0%] text-neutral-800 placeholder:text-neutral-400 ${error ? "border-red-500" : "border-[#9F9F9F]"}`}
             />
           ) : (
             <input
@@ -62,12 +57,7 @@ function ContactFormField({
               id={name}
               type={type}
               placeholder={placeholder}
-              className={`font-poppins h-[75px] w-full rounded-[10px]
-                         border bg-white px-4
-                         text-[16px] font-normal leading-[100%]
-                         tracking-[0%] text-neutral-800
-                         placeholder:text-neutral-400
-                         ${error ? "border-red-500" : "border-[#9F9F9F]"}`}
+              className={`h-[75px] w-full rounded-[10px] border bg-white px-4 font-poppins text-[16px] leading-[100%] font-normal tracking-[0%] text-neutral-800 placeholder:text-neutral-400 ${error ? "border-red-500" : "border-[#9F9F9F]"}`}
             />
           )
         }
@@ -140,12 +130,7 @@ export default function ContactForm({
         <div className="flex w-full justify-start">
           <button
             type="submit"
-            className="flex h-[55px] w-[237px] items-center justify-center
-               rounded-[5px] border border-[#B88E2F]
-               font-poppins text-[16px] font-normal
-               leading-[100%] tracking-[0%]
-               text-neutral-900 transition
-               bg-[#B88E2F] text-white"
+            className="flex h-[55px] w-[237px] items-center justify-center rounded-[5px] border border-[#B88E2F] bg-[#B88E2F] font-poppins text-[16px] leading-[100%] font-normal tracking-[0%] text-neutral-900 text-white transition"
           >
             <span className="flex h-[27.5px] w-[59.21px] items-center justify-center">
               Submit

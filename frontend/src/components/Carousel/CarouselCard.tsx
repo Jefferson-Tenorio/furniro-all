@@ -15,7 +15,7 @@ const CarouselCard = ({ room, index }: CarouselCardProps) => {
   return (
     <article
       key={room.image}
-      className="flex h-145.5 w-full min-w-80 max-w-101 animate-[slideIn_900ms_ease-in-out] items-end bg-cover bg-center bg-no-repeat p-6"
+      className="flex h-145.5 w-full max-w-101 min-w-80 animate-[slideIn_900ms_ease-in-out] items-end bg-cover bg-center bg-no-repeat p-6"
       style={{ backgroundImage: `url(${getImage(room.image)})` }}
     >
       <div className="h-32.5 w-54.25 bg-primary/70 py-9 pl-9 font-poppins">

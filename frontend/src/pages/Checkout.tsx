@@ -60,11 +60,11 @@ export default function Checkout() {
         breadcrumbHome="Home"
         title="Checkout"
       />
-      <div className="mx-auto flex w-full mb-[123px] mt-[98px] max-w-6xl flex-col items-start gap-[26px] lg:flex-row lg:justify-between">
+      <div className="mx-auto mt-[98px] mb-[123px] flex w-full max-w-6xl flex-col items-start gap-[26px] lg:flex-row lg:justify-between">
         <FormProvider {...methods}>
           <form
             onSubmit={methods.handleSubmit(onSubmit, onError)}
-            className="flex w-full flex-col lg:flex-row gap-10"
+            className="flex w-full flex-col gap-10 lg:flex-row"
           >
             <div className="w-full lg:w-1/2">
               <BillingDetails />

@@ -42,7 +42,7 @@ function FormField({
       {!isFloating && (
         <label
           htmlFor={name}
-          className="font-poppins mb-[22px] block text-[16px] font-medium leading-[100%] text-neutral-800"
+          className="mb-[22px] block font-poppins text-[16px] leading-[100%] font-medium text-neutral-800"
         >
           {label}
           {optional && (
@@ -71,12 +71,11 @@ function FormField({
               {isFloating && (
                 <label
                   htmlFor={name}
-                  className={`font-poppins pointer-events-none absolute left-4 font-medium text-neutral-400
-                              ${
-                                shrink
-                                  ? "top-[10px] text-[12px] leading-[100%]"
-                                  : "top-1/2 -translate-y-1/2 text-[16px] leading-[100%]"
-                              }`}
+                  className={`pointer-events-none absolute left-4 font-poppins font-medium text-neutral-400 ${
+                    shrink
+                      ? "top-[10px] text-[12px] leading-[100%]"
+                      : "top-1/2 -translate-y-1/2 text-[16px] leading-[100%]"
+                  }`}
                 >
                   {label}
                   {optional && (
@@ -187,7 +186,7 @@ export default function BillingDetails() {
 
   return (
     <div className="w-full">
-      <h1 className="font-poppins mb-[36px] flex h-[54px] w-[245px] items-center text-[36px] font-semibold leading-[100%] tracking-[0%] text-neutral-900">
+      <h1 className="mb-[36px] flex h-[54px] w-[245px] items-center font-poppins text-[36px] leading-[100%] font-semibold tracking-[0%] text-neutral-900">
         Billing details
       </h1>
 

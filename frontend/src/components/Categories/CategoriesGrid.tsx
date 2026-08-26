@@ -12,7 +12,7 @@ export default function CategoriesGrid() {
       )}
     >
       <div className="text-center">
-        <h1 className="text-2xl text-primary-text font-bold sm:text-[32px]">
+        <h1 className="text-2xl font-bold text-primary-text sm:text-[32px]">
           Browse The Range
         </h1>
         <span className="text-lg text-primary-text-100 sm:text-xl">

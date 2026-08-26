@@ -13,7 +13,7 @@ const MobileMenu = ({ className }: MobileMenuProps) => {
     <div className={clsx("relative", className)}>
       <LuMenu
         size={32}
-        className={clsx("hover:cursor-pointer hover:scale-110 transition-all")}
+        className={clsx("transition-all hover:scale-110 hover:cursor-pointer")}
         onClick={() => setAtivo(!ativo)}
       />
       <NavMenu
@@ -21,7 +21,7 @@ const MobileMenu = ({ className }: MobileMenuProps) => {
           "h-[calc(100vh-100px)] max-w-[50vw] min-w-62.5",
           "absolute top-16.25 -right-2",
           "flex-col",
-          "justify-center items-center gap-5 ",
+          "items-center justify-center gap-5",
           "bg-primary",
           {
             flex: ativo,

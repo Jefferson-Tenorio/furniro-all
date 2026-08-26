@@ -30,8 +30,8 @@ const PageBanner = ({
           {title}
         </h1>
 
-        <div className="mt-2 flex items-center font-poppins gap-2 text-sm text-primary-text-200/70 sm:text-base">
-          <Link to="/" className={"font-medium hover:text-gray-600 transition"}>
+        <div className="mt-2 flex items-center gap-2 font-poppins text-sm text-primary-text-200/70 sm:text-base">
+          <Link to="/" className={"font-medium transition hover:text-gray-600"}>
             {breadcrumbHome}
           </Link>
           <span>

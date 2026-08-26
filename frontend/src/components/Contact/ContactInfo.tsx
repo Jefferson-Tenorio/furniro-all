@@ -14,7 +14,7 @@ function ContactItem({
       </div>
 
       <div>
-        <h3 className="font-poppins text-[24px] font-medium leading-[100%] tracking-[0%] text-neutral-900">
+        <h3 className="font-poppins text-[24px] leading-[100%] font-medium tracking-[0%] text-neutral-900">
           {title}
         </h3>
 
@@ -22,7 +22,7 @@ function ContactItem({
           {lines.map((line, i) => (
             <p
               key={i}
-              className="font-poppins text-[16px] font-normal leading-[100%] tracking-[0%]"
+              className="font-poppins text-[16px] leading-[100%] font-normal tracking-[0%]"
             >
               {line}
             </p>
