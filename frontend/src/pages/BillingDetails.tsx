@@ -1,4 +1,5 @@
 import { useFormContext, Controller } from "react-hook-form";
+import { useState } from "react";
 import type { CheckoutFormValues } from "@/types/checkout";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -10,6 +11,7 @@ type FormFieldProps = {
   type?: string;
   width?: "full" | "half";
   options?: string[];
+  variant?: "outside" | "floating";
   onChangeInterceptor?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlurInterceptor?: (e: React.FocusEvent<HTMLInputElement>) => void;
 };
@@ -21,68 +23,112 @@ function FormField({
   type = "text",
   width = "full",
   options,
+  variant = "outside",
   onChangeInterceptor,
   onBlurInterceptor,
 }: FormFieldProps) {
   const { control, formState: { errors } } = useFormContext<CheckoutFormValues>();
+  const [focused, setFocused] = useState(false);
   const widthClass = width === "half" ? "sm:col-span-1" : "sm:col-span-2";
   const errorMessage = errors[name]?.message;
+  const isFloating = variant === "floating";
+  const wrapperClass = isFloating ? "relative mt-[22px]" : undefined;
 
   return (
     <div className={`col-span-2 ${widthClass}`}>
-      <label
-        htmlFor={name}
-        className="mb-2 block text-sm font-medium text-neutral-800"
-      >
-        {label}
-        {optional && (
-          <span className="ml-1 font-normal text-neutral-400">
-            (Optional)
-          </span>
-        )}
-      </label>
+      {!isFloating && (
+        <label
+          htmlFor={name}
+          className="font-poppins mb-[22px] block text-[16px] font-medium leading-[100%] text-neutral-800"
+        >
+          {label}
+          {optional && (
+            <span className="ml-1 font-normal text-neutral-400">
+              (Optional)
+            </span>
+          )}
+        </label>
+      )}
 
       <Controller
         name={name}
         control={control}
-        render={({ field }) => (
-          options ? (
-            <select
-              {...field}
-              id={name}
-              className={`w-full rounded-md border bg-white px-4 py-3 text-neutral-800 outline-none transition focus:ring-1 focus:ring-neutral-800 ${
-                errorMessage ? "border-red-500" : "border-neutral-300"
-              }`}
-            >
-              <option value="">Select...</option>
-              {options.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <input
-              {...field}
-              id={name}
-              type={type}
-              onChange={(e) => {
-                field.onChange(e);
-                if (onChangeInterceptor) onChangeInterceptor(e);
-              }}
-              onBlur={(e) => {
-                field.onBlur();
-                if (onBlurInterceptor) onBlurInterceptor(e);
-              }}
-              className={`w-full rounded-md border bg-white px-4 py-3 text-neutral-800 outline-none transition focus:ring-1 focus:ring-neutral-800 ${
-                errorMessage ? "border-red-500" : "border-neutral-300"
-              }`}
-            />
-          )
-        )}
+        render={({ field }) => {
+          const hasValue = field.value !== undefined && field.value !== "";
+          const shrink = isFloating && (focused || hasValue);
+
+          const fieldClass = `h-[75px] w-full rounded-[10px] border bg-white
+                     text-neutral-800 outline-none
+                     ${isFloating ? "px-4 pt-[22px] pb-[6px]" : "px-4"}
+                     ${errorMessage ? "border-red-500" : "border-[#9F9F9F]"}
+                     focus:ring-1 focus:ring-neutral-800`;
+
+          return (
+            <div className={wrapperClass}>
+              {isFloating && (
+                <label
+                  htmlFor={name}
+                  className={`font-poppins pointer-events-none absolute left-4 font-medium text-neutral-400
+                              ${shrink
+                                ? "top-[10px] text-[12px] leading-[100%]"
+                                : "top-1/2 -translate-y-1/2 text-[16px] leading-[100%]"}`}
+                >
+                  {label}
+                  {optional && (
+                    <span className="ml-1 font-normal text-neutral-400">
+                      (Optional)
+                    </span>
+                  )}
+                </label>
+              )}
+
+              {options ? (
+                <select
+                  {...field}
+                  id={name}
+                  onFocus={() => setFocused(true)}
+                  onBlur={() => {
+                    setFocused(false);
+                    field.onBlur();
+                  }}
+                  className={fieldClass}
+                >
+                  <option value="" disabled hidden={isFloating}>
+                    {isFloating ? "" : "Select..."}
+                  </option>
+                  {options.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  {...field}
+                  id={name}
+                  type={type}
+                  onFocus={() => setFocused(true)}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    if (onChangeInterceptor) onChangeInterceptor(e);
+                  }}
+                  onBlur={(e) => {
+                    setFocused(false);
+                    field.onBlur();
+                    if (onBlurInterceptor) onBlurInterceptor(e);
+                  }}
+                  className={fieldClass}
+                />
+              )}
+            </div>
+          );
+        }}
       />
+
       {errorMessage && (
-        <span className="text-red-500 text-xs mt-1 block">{errorMessage}</span>
+        <span className="mt-1 block text-xs text-red-500">
+          {errorMessage}
+        </span>
       )}
     </div>
   );
@@ -96,13 +142,13 @@ const FIELDS: Omit<FormFieldProps, "onChangeInterceptor" | "onBlurInterceptor">[
   {
     name: "country",
     label: "Country / Region",
-    options: ["Brazil", "Portugal", "United States"],
   },
   { name: "streetAddress", label: "Street address" },
   { name: "townCity", label: "Town / City" },
   { name: "province", label: "Province" },
-  { name: "addOnAddress", label: "Add-on address", optional: true },
   { name: "email", label: "Email address", type: "email" },
+    { name: "addOnAddress", label: "Additional information", variant: "floating" },
+
 ];
 
 export default function BillingDetails() {
@@ -117,7 +163,6 @@ export default function BillingDetails() {
           setValue("streetAddress", response.data.logradouro || "");
           setValue("townCity", response.data.localidade || "");
           setValue("province", response.data.uf || "");
-          setValue("country", "Brazil");
           clearErrors(["streetAddress", "townCity", "province", "country"]);
         } else {
           toast.error("CEP not found");
@@ -130,11 +175,11 @@ export default function BillingDetails() {
 
   return (
     <div className="w-full">
-      <h1 className="mb-6 text-2xl font-bold text-neutral-900">
+      <h1 className="font-poppins mb-[36px] flex h-[54px] w-[245px] items-center text-[36px] font-semibold leading-[100%] tracking-[0%] text-neutral-900">
         Billing details
       </h1>
 
-      <div className="grid grid-cols-2 gap-x-4 gap-y-5">
+      <div className="grid grid-cols-2 gap-x-[32px] gap-y-[32px]">
         {FIELDS.map((field) => (
           <FormField
             key={field.name}
