@@ -9,6 +9,7 @@ import { NotFound } from "./components/NotFound";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
+import CheckoutPage from "./pages/Checkout-page";
 
 export default function App() {
   return (
@@ -22,7 +23,7 @@ export default function App() {
           <Route path="/product/:id" element={<SingleProduct />} />
           <Route path="/product/slug/:slug" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<ProtectedRoute><h1>checkout</h1></ProtectedRoute>} />
+          <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
           <Route path="/contato" element={<ProtectedRoute><h1>contato</h1></ProtectedRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

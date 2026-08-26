@@ -1,4 +1,3 @@
-import { FiX } from "react-icons/fi";
 import { formatPrice } from "@/utils/price";
 import { memo } from "react";
 
