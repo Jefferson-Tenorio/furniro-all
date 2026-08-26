@@ -7,6 +7,7 @@ import PageBanner from "../components/Shop/PageBanner";
 import { useNavigate } from "react-router";
 import { useCartStore } from "@/stores/cart.store";
 import { checkoutSchema, type CheckoutFormValues } from "@/types/checkout";
+import Benefits from "@/components/Benefits/Benefits";
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ export default function CheckoutPage() {
   return (
     <>
       <PageBanner breadcrumbCurrent="Checkout" breadcrumbHome="Home" title="Checkout" />
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-10 px-6 py-10 lg:flex-row lg:justify-between">
+      <div className="mx-auto flex w-full mb-[123px] mt-[98px] max-w-6xl flex-col items-start gap-[26px] lg:flex-row lg:justify-between">
         <FormProvider {...methods}>
           <form
             onSubmit={methods.handleSubmit(onSubmit, onError)}
@@ -69,6 +70,7 @@ export default function CheckoutPage() {
           </form>
         </FormProvider>
       </div>
+      <Benefits />
     </>
   );
 }
