@@ -6,7 +6,7 @@ export const authenticate = async (
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
-  const token = req.cookies?.token;
+  const token = req.cookies?.token as string | undefined;
   if (!token) {
     res.status(401).json({ message: "Not authenticated" });
     return;

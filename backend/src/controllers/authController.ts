@@ -7,12 +7,17 @@ const COOKIE_OPTIONS = {
   secure: process.env.NODE_ENV === "production",
 };
 
+interface AuthBody {
+  username?: string;
+  password?: string;
+}
+
 export class AuthController {
   constructor(private readonly service: AuthService) {}
 
   async login(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { username, password } = req.body;
+      const { username, password } = req.body as AuthBody;
       if (!username || !password) {
         res.status(400).json({ message: "Username and password are required" });
         return;
@@ -53,7 +58,7 @@ export class AuthController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      const { username, password } = req.body;
+      const { username, password } = req.body as AuthBody;
       if (!username || !password) {
         res.status(400).json({ message: "Username and password are required" });
         return;

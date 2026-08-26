@@ -7,15 +7,20 @@ export default defineConfig([
   globalIgnores(["dist"]),
   {
     files: ["**/*.ts"],
-    extends: [js.configs.recommended, tseslint.configs.recommended],
+    extends: [js.configs.recommended, tseslint.configs.recommendedTypeChecked],
     languageOptions: {
       globals: globals.node,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
     rules: {
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_" },
       ],
+      "no-console": "warn",
     },
   },
 ]);
