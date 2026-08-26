@@ -8,8 +8,9 @@
     "server": "json-server --watch db.json --port 3001",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "typecheck": "tsc -b",
     "test": "vitest",
-    "test:coverage": "vitest --coverage",
+    "test:run": "vitest run",
     "preview": "vite preview"
   },
   "dependencies": {
