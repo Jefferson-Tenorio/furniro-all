@@ -7,6 +7,7 @@ const FAIL = "\x1b[31m✗\x1b[0m";
 const ROOT = path.resolve(import.meta.dirname, "..");
 
 const STAGES = [
+  { label: "format", command: "npm run format:check" },
   { label: "frontend lint", cwd: "frontend", command: "npm run lint" },
   { label: "backend lint", cwd: "backend", command: "npm run lint" },
   { label: "backend typecheck", cwd: "backend", command: "npm run typecheck" },
