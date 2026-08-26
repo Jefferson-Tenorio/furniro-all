@@ -43,7 +43,7 @@ const CONTACT_ITEMS = [
     lines: [
       "236 5th SE Avenue, New York NY10000, United States",
     ],
-    icon: "/Contact/address.svg",
+    icon: "/Contact/location.svg",
   },
   {
     title: "Phone",
@@ -59,7 +59,7 @@ const CONTACT_ITEMS = [
       "Monday-Friday: 9:00 - 22:00",
       "Saturday-Sunday: 9:00 - 21:00",
     ],
-    icon: "/Contact/time.svg",
+    icon: "/Contact/clock.svg",
   },
 ];
 
