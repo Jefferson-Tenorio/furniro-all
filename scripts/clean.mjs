@@ -27,7 +27,9 @@ function main() {
     console.log(`${PREFIX} Nothing to clean.`);
     return;
   }
-  console.log(`${PREFIX} Removed ${removed} folder(s). Run \`npm run setup\` to restore.`);
+  console.log(
+    `${PREFIX} Removed ${removed} folder(s). Run \`npm run setup\` to restore.`,
+  );
 }
 
 main();

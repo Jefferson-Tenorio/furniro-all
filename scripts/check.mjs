@@ -11,7 +11,11 @@ const STAGES = [
   { label: "frontend lint", cwd: "frontend", command: "npm run lint" },
   { label: "backend lint", cwd: "backend", command: "npm run lint" },
   { label: "backend typecheck", cwd: "backend", command: "npm run typecheck" },
-  { label: "frontend typecheck", cwd: "frontend", command: "npm run typecheck" },
+  {
+    label: "frontend typecheck",
+    cwd: "frontend",
+    command: "npm run typecheck",
+  },
   { label: "frontend tests", cwd: "frontend", command: "npm run test:run" },
   { label: "backend build", cwd: "backend", command: "npm run build" },
   { label: "frontend build", cwd: "frontend", command: "npm run build" },
@@ -23,7 +27,7 @@ function main() {
   for (const stage of STAGES) {
     process.stdout.write(`${PREFIX} ${stage.label}... `);
     const result = spawnSync(stage.command, {
-      cwd: path.join(ROOT, stage.cwd),
+      cwd: path.join(ROOT, stage.cwd ?? "."),
       stdio: ["ignore", "pipe", "pipe"],
       shell: true,
     });
@@ -38,9 +42,11 @@ function main() {
 
   if (failed.length > 0) {
     const stage = failed[0];
-    console.error(`\n${PREFIX} ${FAIL} Failed at "${stage.label}". Full log:\n`);
+    console.error(
+      `\n${PREFIX} ${FAIL} Failed at "${stage.label}". Full log:\n`,
+    );
     const result = spawnSync(stage.command, {
-      cwd: path.join(ROOT, stage.cwd),
+      cwd: path.join(ROOT, stage.cwd ?? "."),
       stdio: "inherit",
       shell: true,
     });

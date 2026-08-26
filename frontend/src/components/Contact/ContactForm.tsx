@@ -74,9 +74,7 @@ function ContactFormField({
       />
 
       {error && (
-        <span className="mt-1 block text-xs text-red-500">
-          {error}
-        </span>
+        <span className="mt-1 block text-xs text-red-500">{error}</span>
       )}
     </div>
   );
@@ -139,21 +137,21 @@ export default function ContactForm({
           multiline
         />
 
-<div className="flex w-full justify-start">
-  <button
-    type="submit"
-    className="flex h-[55px] w-[237px] items-center justify-center
+        <div className="flex w-full justify-start">
+          <button
+            type="submit"
+            className="flex h-[55px] w-[237px] items-center justify-center
                rounded-[5px] border border-[#B88E2F]
                font-poppins text-[16px] font-normal
                leading-[100%] tracking-[0%]
                text-neutral-900 transition
                bg-[#B88E2F] text-white"
-  >
-    <span className="flex h-[27.5px] w-[59.21px] items-center justify-center">
-      Submit
-    </span>
-  </button>
-</div>
+          >
+            <span className="flex h-[27.5px] w-[59.21px] items-center justify-center">
+              Submit
+            </span>
+          </button>
+        </div>
       </form>
     </div>
   );

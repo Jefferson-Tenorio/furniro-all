@@ -33,45 +33,61 @@ export function Register() {
 
   return (
     <>
-      <PageBanner breadcrumbCurrent="Register" breadcrumbHome="Home" title="Register" />
+      <PageBanner
+        breadcrumbCurrent="Register"
+        breadcrumbHome="Home"
+        title="Register"
+      />
       <div className="flex justify-center items-center py-20 px-4">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md bg-white p-8 shadow-md rounded-md">
-          <h2 className="text-2xl font-bold mb-6 text-center">Create Account</h2>
-          
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full max-w-md bg-white p-8 shadow-md rounded-md"
+        >
+          <h2 className="text-2xl font-bold mb-6 text-center">
+            Create Account
+          </h2>
+
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2">Username</label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               className="w-full border rounded-md px-3 py-2 outline-none focus:border-[#B88E2F]"
               {...register("username")}
             />
             {errors.username && (
-              <p className="mt-1 text-sm text-red-600">{errors.username.message}</p>
+              <p className="mt-1 text-sm text-red-600">
+                {errors.username.message}
+              </p>
             )}
           </div>
 
           <div className="mb-6">
             <label className="block text-sm font-medium mb-2">Password</label>
-            <input 
-              type="password" 
+            <input
+              type="password"
               className="w-full border rounded-md px-3 py-2 outline-none focus:border-[#B88E2F]"
               {...register("password")}
             />
             {errors.password && (
-              <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+              <p className="mt-1 text-sm text-red-600">
+                {errors.password.message}
+              </p>
             )}
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={isSubmitting}
             className="w-full bg-[#B88E2F] text-white py-2 rounded-md hover:bg-[#A07B28] transition disabled:opacity-50"
           >
             {isSubmitting ? "Loading..." : "Register"}
           </button>
-          
+
           <p className="mt-4 text-center text-sm text-gray-600">
-            Already have an account? <Link to="/login" className="text-[#B88E2F] underline">Login</Link>
+            Already have an account?{" "}
+            <Link to="/login" className="text-[#B88E2F] underline">
+              Login
+            </Link>
           </p>
         </form>
       </div>

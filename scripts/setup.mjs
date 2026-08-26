@@ -46,7 +46,9 @@ function ensureEnvFile(project) {
 function main() {
   const nodeMajor = Number(process.versions.node.split(".")[0]);
   if (nodeMajor < REQUIRED_NODE_MAJOR) {
-    die(`Node.js >= ${REQUIRED_NODE_MAJOR} required (found ${process.versions.node}).`);
+    die(
+      `Node.js >= ${REQUIRED_NODE_MAJOR} required (found ${process.versions.node}).`,
+    );
   }
   console.log(`${OK} Node.js ${process.versions.node}`);
 

@@ -7,15 +7,7 @@ import { PAYMENT_METHODS } from "@/constants/checkout";
 import { memo, useMemo } from "react";
 
 const OrderLineItem = memo(
-  ({
-    name,
-    qty,
-    price,
-  }: {
-    name: string;
-    qty: number;
-    price: string;
-  }) => {
+  ({ name, qty, price }: { name: string; qty: number; price: string }) => {
     return (
       <div className="flex items-baseline justify-between py-2 ">
         <div className="flex items-center">
@@ -32,9 +24,9 @@ const OrderLineItem = memo(
           </span>
         </div>
 
-<span className="font-poppins flex min-w-[109px] h-[24px] items-center whitespace-nowrap text-[16px] font-light leading-[100%] tracking-[0%]">
-  {price}
-</span>
+        <span className="font-poppins flex min-w-[109px] h-[24px] items-center whitespace-nowrap text-[16px] font-light leading-[100%] tracking-[0%]">
+          {price}
+        </span>
       </div>
     );
   },
@@ -42,63 +34,77 @@ const OrderLineItem = memo(
 
 OrderLineItem.displayName = "OrderLineItem";
 
-const SummaryRow = memo(({ label, value, emphasize = false }: { label: string; value: string; emphasize?: boolean }) => {
-  return (
-    <div className="flex items-center justify-between mt-[22px]">
-  <span
-    className={
-      emphasize
-        ? "font-poppins flex h-[24px] min-w-[40px] whitespace-nowrap items-center text-[16px] font-normal leading-[100%] tracking-[0%] text-neutral-900"
-        : "font-poppins flex h-[24px] min-w-[40px] whitespace-nowrap items-center text-[16px] font-normal leading-[100%] tracking-[0%] text-neutral-900"
-    }
-  >
-    {label}
-  </span>
+const SummaryRow = memo(
+  ({
+    label,
+    value,
+    emphasize = false,
+  }: {
+    label: string;
+    value: string;
+    emphasize?: boolean;
+  }) => {
+    return (
+      <div className="flex items-center justify-between mt-[22px]">
+        <span
+          className={
+            emphasize
+              ? "font-poppins flex h-[24px] min-w-[40px] whitespace-nowrap items-center text-[16px] font-normal leading-[100%] tracking-[0%] text-neutral-900"
+              : "font-poppins flex h-[24px] min-w-[40px] whitespace-nowrap items-center text-[16px] font-normal leading-[100%] tracking-[0%] text-neutral-900"
+          }
+        >
+          {label}
+        </span>
 
-  <span
-    className={
-      emphasize
-        ? "font-poppins flex h-[36px] min-w-[178px] items-center text-[24px] font-bold leading-[100%] tracking-[0%] text-[#B88E2F]"
-        : "font-poppins flex h-[24px] min-w-[109px] items-center text-[16px] font-light leading-[100%] tracking-[0%]"
-    }
-  >
-    {value}
-  </span>
-</div>
-  );
-});
+        <span
+          className={
+            emphasize
+              ? "font-poppins flex h-[36px] min-w-[178px] items-center text-[24px] font-bold leading-[100%] tracking-[0%] text-[#B88E2F]"
+              : "font-poppins flex h-[24px] min-w-[109px] items-center text-[16px] font-light leading-[100%] tracking-[0%]"
+          }
+        >
+          {value}
+        </span>
+      </div>
+    );
+  },
+);
 
 SummaryRow.displayName = "SummaryRow";
 
 export default function OrderSummary() {
-  const { control, formState: { errors } } = useFormContext<CheckoutFormValues>();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<CheckoutFormValues>();
   const cartItems = useCartStore((s) => s.items);
   const getSubtotal = useCartStore((s) => s.getSubtotal);
 
   const subtotal = useMemo(() => formatPrice(getSubtotal()), [getSubtotal]);
   const total = useMemo(() => subtotal, [subtotal]);
 
-  const renderedItems = useMemo(() =>
-    cartItems.map((item) => (
-      <OrderLineItem
-        key={item.id}
-        name={item.name}
-        qty={item.quantity}
-        price={formatPrice(item.price * item.quantity)}
-      />
-    )),
-    [cartItems]
+  const renderedItems = useMemo(
+    () =>
+      cartItems.map((item) => (
+        <OrderLineItem
+          key={item.id}
+          name={item.name}
+          qty={item.quantity}
+          price={formatPrice(item.price * item.quantity)}
+        />
+      )),
+    [cartItems],
   );
 
   return (
     <div className="mx-auto w-full max-w-md">
       <div className="flex items-center justify-between mt-[50px]">
         <span className="font-poppins flex h-[36px] w-[94px] items-center text-[24px] font-medium leading-[100%] tracking-[0%] text-neutral-900">
-  Product
-</span>
+          Product
+        </span>
         <span className="font-poppins flex h-[36px] w-[103px] items-center text-[24px] font-medium leading-[100%] tracking-[0%] text-neutral-900">
-  Subtotal
-</span>
+          Subtotal
+        </span>
       </div>
 
       <div className="mt-4">
@@ -116,9 +122,7 @@ export default function OrderSummary() {
         </div>
       </div>
 
-<div className="w-full h-0 border-t border-[#D9D9D9] mt-[30px] mb-[22px]" />
-
-
+      <div className="w-full h-0 border-t border-[#D9D9D9] mt-[30px] mb-[22px]" />
 
       <div className="">
         <Controller
@@ -148,26 +152,31 @@ export default function OrderSummary() {
 
       <p className="text-[16px] font-light  text-justify leading-[100%] tracking-[0%] font-poppins mt-6 leading-relaxed text-neutral-900 text-justify">
         Your personal data will be used to support your experience throughout
-        this website, to manage access to your account, and for other
-        purposes described in our{" "}
-        <a href="#" className="font-poppins font-bold text-neutral-900 text-[16px]">
+        this website, to manage access to your account, and for other purposes
+        described in our{" "}
+        <a
+          href="#"
+          className="font-poppins font-bold text-neutral-900 text-[16px]"
+        >
           privacy policy.
         </a>
       </p>
-<div className="mt-[39px] flex w-full justify-center">
-  <button
-    type="submit"
-    className="flex h-[64px] w-[318px] items-center justify-center
+      <div className="mt-[39px] flex w-full justify-center">
+        <button
+          type="submit"
+          className="flex h-[64px] w-[318px] items-center justify-center
                rounded-[15px] border border-neutral-900
                transition hover:bg-neutral-900 hover:text-white"
-  >
-    <span className="flex h-[30px] w-[114px] items-center justify-center
+        >
+          <span
+            className="flex h-[30px] w-[114px] items-center justify-center
                      font-poppins text-[20px] font-normal leading-[100%] tracking-[0%]
-                     text-neutral-900">
-      Place order
-    </span>
-  </button>
-</div>
+                     text-neutral-900"
+          >
+            Place order
+          </span>
+        </button>
+      </div>
     </div>
   );
 }

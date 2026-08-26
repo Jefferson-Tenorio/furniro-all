@@ -17,7 +17,7 @@ export class AuthController {
         res.status(400).json({ message: "Username and password are required" });
         return;
       }
-      
+
       const token = await this.service.login(username, password);
 
       res.cookie("token", token, {
@@ -37,7 +37,8 @@ export class AuthController {
 
   async logout(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const token = typeof req.cookies?.token === "string" ? req.cookies.token : undefined;
+      const token =
+        typeof req.cookies?.token === "string" ? req.cookies.token : undefined;
       await this.service.logout(token);
       res.clearCookie("token", COOKIE_OPTIONS);
       res.status(200).json({ message: "Logged out" });
@@ -46,7 +47,11 @@ export class AuthController {
     }
   }
 
-  async register(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async register(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     try {
       const { username, password } = req.body;
       if (!username || !password) {

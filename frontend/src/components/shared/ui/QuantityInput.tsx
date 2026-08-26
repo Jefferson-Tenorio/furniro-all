@@ -24,7 +24,7 @@ export function QuantityInput({
     <div
       className={clsx(
         "inline-flex w-fit overflow-hidden rounded-[10px] border border-footer-gray",
-        className
+        className,
       )}
     >
       <button
@@ -34,7 +34,7 @@ export function QuantityInput({
         className={clsx(
           "flex cursor-pointer items-center justify-center px-3 py-3.5 transition",
           canDecrease && "hover:bg-footer-gray/10",
-          !canDecrease && "opacity-50 cursor-not-allowed"
+          !canDecrease && "opacity-50 cursor-not-allowed",
         )}
       >
         -
@@ -54,7 +54,7 @@ export function QuantityInput({
         className={clsx(
           "flex cursor-pointer items-center justify-center px-3 py-3.5 transition",
           canIncrease && "hover:bg-footer-gray/10",
-          !canIncrease && "opacity-50 cursor-not-allowed"
+          !canIncrease && "opacity-50 cursor-not-allowed",
         )}
       >
         +

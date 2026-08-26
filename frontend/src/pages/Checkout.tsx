@@ -43,7 +43,8 @@ export default function Checkout() {
   const onError = (errors: FieldErrors<CheckoutFormValues>) => {
     const firstErrorKey = Object.keys(errors)[0];
     if (firstErrorKey) {
-      const errorMessage = errors[firstErrorKey as keyof CheckoutFormValues]?.message;
+      const errorMessage =
+        errors[firstErrorKey as keyof CheckoutFormValues]?.message;
       if (errorMessage) {
         toast.error(errorMessage);
       }
@@ -54,7 +55,11 @@ export default function Checkout() {
 
   return (
     <>
-      <PageBanner breadcrumbCurrent="Checkout" breadcrumbHome="Home" title="Checkout" />
+      <PageBanner
+        breadcrumbCurrent="Checkout"
+        breadcrumbHome="Home"
+        title="Checkout"
+      />
       <div className="mx-auto flex w-full mb-[123px] mt-[98px] max-w-6xl flex-col items-start gap-[26px] lg:flex-row lg:justify-between">
         <FormProvider {...methods}>
           <form

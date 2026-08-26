@@ -12,11 +12,7 @@ type CarouselProps = {
   onChangeRoom: (index: number) => void;
 };
 
-const Carousel = ({
-  rooms,
-  currentRoom,
-  onChangeRoom,
-}: CarouselProps) => {
+const Carousel = ({ rooms, currentRoom, onChangeRoom }: CarouselProps) => {
   if (rooms.length < 2) {
     return null;
   }

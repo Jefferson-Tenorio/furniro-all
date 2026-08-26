@@ -4,7 +4,10 @@ import { ITokenDenylistRepository } from "../repositories/iTokenDenylistReposito
 import { JwtService } from "./jwtService";
 
 export class AuthError extends Error {
-  constructor(public statusCode: number, message: string) {
+  constructor(
+    public statusCode: number,
+    message: string,
+  ) {
     super(message);
     this.name = "AuthError";
   }

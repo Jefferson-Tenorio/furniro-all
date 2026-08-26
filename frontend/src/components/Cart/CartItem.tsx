@@ -1,7 +1,10 @@
 import { formatPrice } from "@/utils/price";
 import { Link } from "react-router";
 import { getImage } from "../../lib/assets";
-import { useCartStore, type CartItem as CartItemType } from "../../stores/cart.store";
+import {
+  useCartStore,
+  type CartItem as CartItemType,
+} from "../../stores/cart.store";
 import { QuantityInput } from "./QuantityInput";
 import { RemoveItem } from "./RemoveItem";
 import { memo } from "react";

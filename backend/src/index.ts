@@ -32,7 +32,6 @@ app.use("/health", healthRouter);
 app.use("/products", productsRouter);
 app.use("/auth", authRouter);
 
-
 app.use(errorHandler);
 
 app.listen(PORT, () => {

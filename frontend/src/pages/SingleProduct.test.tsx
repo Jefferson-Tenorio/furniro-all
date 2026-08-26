@@ -110,7 +110,9 @@ describe("SingleProduct", () => {
     expect(
       screen.getByText("Something went wrong while loading this product."),
     ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Try again" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Try again" }),
+    ).toBeInTheDocument();
   });
 
   it("should reload the product when clicking Try again", async () => {
@@ -165,14 +167,20 @@ describe("SingleProduct", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("Rs. 1,750.00")).toBeInTheDocument();
     expect(screen.getByText("Rs. 2,500.00")).toBeInTheDocument();
-    expect(screen.getByRole("tab", { name: "Description" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("tab", { name: "Description" }),
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("tab", { name: "Additional Information" }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Full description of the product.")).toBeInTheDocument();
+    expect(
+      screen.getByText("Full description of the product."),
+    ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "L" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "XL" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Add To Cart" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Add To Cart" }),
+    ).toBeInTheDocument();
     expect(screen.getByText("SKU-001")).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: "Related Products" }),
@@ -191,7 +199,9 @@ describe("SingleProduct", () => {
     });
 
     renderAt("/product/1");
-    expect(screen.getByText("Full description of the product.")).toBeInTheDocument();
+    expect(
+      screen.getByText("Full description of the product."),
+    ).toBeInTheDocument();
 
     await user.click(
       screen.getByRole("tab", { name: "Additional Information" }),

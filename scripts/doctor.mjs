@@ -47,7 +47,10 @@ function checkPrismaClient() {
   if (fs.existsSync(clientPath)) {
     pass("Prisma client generated");
   } else {
-    fail("Prisma client generated", "run `npm run setup` or `npx prisma generate` in backend/");
+    fail(
+      "Prisma client generated",
+      "run `npm run setup` or `npx prisma generate` in backend/",
+    );
   }
 }
 
@@ -71,17 +74,39 @@ function main() {
   console.log(`${PREFIX} Checking environment...\n`);
 
   checkNode();
-  checkFile("backend/.env", "backend/.env exists", "run `npm run setup` or copy .env.example");
-  checkFile("frontend/.env", "frontend/.env exists", "run `npm run setup` or copy .env.example");
-  checkFile("backend/node_modules", "backend dependencies installed", "run `npm install` in backend/");
-  checkFile("frontend/node_modules", "frontend dependencies installed", "run `npm install` in frontend/");
-  checkFile("backend/prisma/dev.db", "SQLite database exists", "run `npm run db:migrate`");
+  checkFile(
+    "backend/.env",
+    "backend/.env exists",
+    "run `npm run setup` or copy .env.example",
+  );
+  checkFile(
+    "frontend/.env",
+    "frontend/.env exists",
+    "run `npm run setup` or copy .env.example",
+  );
+  checkFile(
+    "backend/node_modules",
+    "backend dependencies installed",
+    "run `npm install` in backend/",
+  );
+  checkFile(
+    "frontend/node_modules",
+    "frontend dependencies installed",
+    "run `npm install` in frontend/",
+  );
+  checkFile(
+    "backend/prisma/dev.db",
+    "SQLite database exists",
+    "run `npm run db:migrate`",
+  );
   checkPrismaClient();
   checkMigrations();
 
   console.log("");
   if (failures > 0) {
-    console.error(`${PREFIX} ${failures} problem(s) found. Fix the items above and run again.`);
+    console.error(
+      `${PREFIX} ${failures} problem(s) found. Fix the items above and run again.`,
+    );
     process.exit(1);
   }
   if (warnings > 0) {

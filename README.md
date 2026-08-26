@@ -52,15 +52,15 @@ Abra `http://localhost:5173` no navegador.
 
 ### Comandos úteis
 
-| Comando             | O que faz                                                        |
-| ------------------- | ---------------------------------------------------------------- |
-| `npm run setup`     | Prepara o projeto do zero (env, dependências, migrations, seed)  |
-| `npm run dev`       | Sobe backend e frontend juntos                                   |
-| `npm run doctor`    | Verifica se o ambiente está correto                              |
-| `npm run check`     | Lint + typecheck + testes + build dos dois lados                 |
-| `npm run db:reset`  | Dropa o banco, reaplica migrations e roda o seed                 |
-| `npm run db:seed`   | Popula o banco com produtos e usuários de teste                  |
-| `npm run clean`     | Remove `node_modules`, `dist` e `coverage`                       |
+| Comando            | O que faz                                                       |
+| ------------------ | --------------------------------------------------------------- |
+| `npm run setup`    | Prepara o projeto do zero (env, dependências, migrations, seed) |
+| `npm run dev`      | Sobe backend e frontend juntos                                  |
+| `npm run doctor`   | Verifica se o ambiente está correto                             |
+| `npm run check`    | Lint + typecheck + testes + build dos dois lados                |
+| `npm run db:reset` | Dropa o banco, reaplica migrations e roda o seed                |
+| `npm run db:seed`  | Popula o banco com produtos e usuários de teste                 |
+| `npm run clean`    | Remove `node_modules`, `dist` e `coverage`                      |
 
 Usuários criados pelo seed para testar login: `admin / admin123` e `user / user123`.
 
@@ -114,11 +114,10 @@ A aplicação ficará disponível em:
 http://localhost:5173
 ```
 
-
-### Como rodar os testes e observar a cobertura 
+### Como rodar os testes e observar a cobertura
 
 ```bash
-npm run test:coverage 
+npm run test:coverage
 ```
 
 Ou use `npm run check` na raiz para validar lint, tipos, testes e build de uma vez.
@@ -191,15 +190,15 @@ Open `http://localhost:5173` in your browser.
 
 ### Useful commands
 
-| Command             | What it does                                                    |
-| ------------------- | --------------------------------------------------------------- |
-| `npm run setup`     | Prepares the project from scratch (env, deps, migrations, seed) |
-| `npm run dev`       | Starts backend and frontend together                            |
-| `npm run doctor`    | Checks whether the environment is correct                       |
-| `npm run check`     | Lint + typecheck + tests + build for both sides                 |
-| `npm run db:reset`  | Drops the database, re-applies migrations and runs the seed     |
-| `npm run db:seed`   | Populates the database with products and test users             |
-| `npm run clean`     | Removes `node_modules`, `dist` and `coverage`                   |
+| Command            | What it does                                                    |
+| ------------------ | --------------------------------------------------------------- |
+| `npm run setup`    | Prepares the project from scratch (env, deps, migrations, seed) |
+| `npm run dev`      | Starts backend and frontend together                            |
+| `npm run doctor`   | Checks whether the environment is correct                       |
+| `npm run check`    | Lint + typecheck + tests + build for both sides                 |
+| `npm run db:reset` | Drops the database, re-applies migrations and runs the seed     |
+| `npm run db:seed`  | Populates the database with products and test users             |
+| `npm run clean`    | Removes `node_modules`, `dist` and `coverage`                   |
 
 Users created by the seed for login testing: `admin / admin123` and `user / user123`.
 
@@ -253,12 +252,10 @@ The application will be available at:
 http://localhost:5173
 ```
 
-
-
 ### How to run Tests and see coverage
 
 ```bash
-npm run test:coverage 
+npm run test:coverage
 ```
 
 Or use `npm run check` from the root to validate lint, types, tests and build at once.

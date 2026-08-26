@@ -14,9 +14,7 @@ export type AuthSession = {
 };
 
 function extractString(value: unknown): string | null {
-  return typeof value === "string" && value.trim().length > 0
-    ? value
-    : null;
+  return typeof value === "string" && value.trim().length > 0 ? value : null;
 }
 
 function extractToken(payload: unknown): string | null {
@@ -57,7 +55,9 @@ export const authService = {
     const token = extractToken(response.data);
 
     if (!token) {
-      throw new Error("Login succeeded, but the server did not return a token.");
+      throw new Error(
+        "Login succeeded, but the server did not return a token.",
+      );
     }
 
     return { username, token } satisfies AuthSession;

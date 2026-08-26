@@ -19,7 +19,8 @@ const Mosaic = () => {
       </h1>
       <h1
         className={clsx(
-          "text-primary-text-200 text-[25px] font-poppins font-bold my-2", "md:text-[40px]",
+          "text-primary-text-200 text-[25px] font-poppins font-bold my-2",
+          "md:text-[40px]",
         )}
       >
         #FuniroFurniture
