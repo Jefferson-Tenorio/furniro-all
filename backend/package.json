@@ -8,6 +8,7 @@
     "build": "tsc",
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
+    "db:reset": "prisma migrate reset --force",
     "prisma:generate": "prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
