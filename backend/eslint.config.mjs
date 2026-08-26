@@ -20,7 +20,20 @@ export default defineConfig([
         "error",
         { argsIgnorePattern: "^_" },
       ],
-      "no-console": "warn",
+      "no-console": "error",
+    },
+  },
+  {
+    // Arquivos cujo trabalho é escrever no terminal: startup, request logging,
+    // saída de erros e o script de seed (CLI, fora da API).
+    files: [
+      "src/index.ts",
+      "src/middlewares/loggerMiddleware.ts",
+      "src/middlewares/errorHandler.ts",
+      "prisma/seed.ts",
+    ],
+    rules: {
+      "no-console": "off",
     },
   },
 ]);
