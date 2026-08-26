@@ -34,20 +34,19 @@ export const PaymentOption = memo(({
             <span className="h-2 w-2 rounded-full bg-neutral-900" />
           )}
         </span>
-        <span
-          className={`text-sm font-medium ${
-            selected ? "text-neutral-900" : "text-neutral-500"
-          }`}
-        >
-          {label}
-        </span>
+<span
+  className={`font-poppins flex h-[24px] w-[160px] items-center text-[16px] font-normal leading-[100%] tracking-[0%] ${
+    selected ? "text-neutral-900" : "text-[#9F9F9F]"
+  }`}
+>
+  {label}
+</span>
       </button>
-
-      {selected && description && (
-        <p className="mb-2 text-sm leading-relaxed text-neutral-400 text-justify">
-          {description}
-        </p>
-      )}
+{selected && description && (
+  <p className="mb-2 font-poppins text-[16px] font-light leading-[100%] tracking-[0%] text-justify text-neutral-400">
+    {description}
+  </p>
+)}
     </div>
   );
 });
