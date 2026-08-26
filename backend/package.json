@@ -10,7 +10,9 @@
     "db:seed": "prisma db seed",
     "db:reset": "prisma migrate reset --force",
     "prisma:generate": "prisma generate",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "echo \"No backend tests yet\" && exit 0"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -32,17 +34,21 @@
     "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^26.1.2",
+    "eslint": "^10.9.1",
+    "globals": "^17.11.0",
     "nodemon": "^3.1.14",
     "prisma": "^6.4.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.23.1",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.68.0"
   },
   "allowScripts": {
     "@prisma/client@6.19.3": true,

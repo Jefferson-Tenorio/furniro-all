@@ -5,6 +5,7 @@ import errorHandler from "./middlewares/errorHandler";
 import { requestLogger } from "./middlewares/loggerMiddleware";
 import productsRouter from "./routes/productRouter";
 import authRouter from "./routes/authRouter";
+import healthRouter from "./routes/healthRouter";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -27,6 +28,7 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).send("Health OK");
 });
 
+app.use("/health", healthRouter);
 app.use("/products", productsRouter);
 app.use("/auth", authRouter);
 

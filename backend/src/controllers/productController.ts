@@ -9,7 +9,7 @@ import {
 import Service from "../services/iService";
 import Controller from "./iController";
 
-export default class ProductController implements Controller<Product> {
+export default class ProductController implements Controller {
   constructor(
     private productService: Service<
       Product,

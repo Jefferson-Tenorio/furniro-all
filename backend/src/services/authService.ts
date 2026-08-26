@@ -43,6 +43,7 @@ export class AuthService {
         : new Date(Date.now() + 3600 * 1000); // fallback 1h
       await this.denylist.add(payload.jti, payload.userId, expiresAt);
     } catch {
+      // token já inválido/expirado: nada a negar
     }
   }
 

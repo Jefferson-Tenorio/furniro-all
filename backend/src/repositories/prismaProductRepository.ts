@@ -70,7 +70,7 @@ export class PrismaProductRepository implements Repository<
     try {
       await this.prisma.product.delete({ where: { id } })
       return true
-    } catch (err) {
+    } catch {
       return false
     }
   }
