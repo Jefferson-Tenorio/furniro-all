@@ -1,6 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import type { Control } from "react-hook-form";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -11,8 +12,86 @@ const contactSchema = z.object({
 
 export type ContactFormValues = z.infer<typeof contactSchema>;
 
-export default function ContactForm({ onSubmit }: { onSubmit: (data: ContactFormValues) => void }) {
-  const { control, handleSubmit, formState: { errors } } = useForm<ContactFormValues>({
+interface ContactFormFieldProps {
+  label: string;
+  name: keyof ContactFormValues;
+  control: Control<ContactFormValues>;
+  type?: string;
+  placeholder?: string;
+  multiline?: boolean;
+  error?: string;
+}
+
+function ContactFormField({
+  label,
+  name,
+  control,
+  type = "text",
+  placeholder,
+  multiline = false,
+  error,
+}: ContactFormFieldProps) {
+  return (
+    <div className="w-full">
+      <label
+        htmlFor={name}
+        className="font-poppins mb-[22px] block text-[16px] font-medium leading-[100%] tracking-[0%] text-neutral-800"
+      >
+        {label}
+      </label>
+
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) =>
+          multiline ? (
+            <textarea
+              {...field}
+              id={name}
+              placeholder={placeholder}
+              className={`font-poppins h-[75px] w-full resize-none rounded-[10px]
+                         border bg-white px-4 py-3
+                         text-[16px] font-normal leading-[100%]
+                         tracking-[0%] text-neutral-800
+                         placeholder:text-neutral-400
+                         ${error ? "border-red-500" : "border-[#9F9F9F]"}`}
+            />
+          ) : (
+            <input
+              {...field}
+              id={name}
+              type={type}
+              placeholder={placeholder}
+              className={`font-poppins h-[75px] w-full rounded-[10px]
+                         border bg-white px-4
+                         text-[16px] font-normal leading-[100%]
+                         tracking-[0%] text-neutral-800
+                         placeholder:text-neutral-400
+                         ${error ? "border-red-500" : "border-[#9F9F9F]"}`}
+            />
+          )
+        }
+      />
+
+      {error && (
+        <span className="mt-1 block text-xs text-red-500">
+          {error}
+        </span>
+      )}
+    </div>
+  );
+}
+
+export default function ContactForm({
+  onSubmit,
+}: {
+  onSubmit: (data: ContactFormValues) => void;
+}) {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
       name: "",
@@ -22,97 +101,59 @@ export default function ContactForm({ onSubmit }: { onSubmit: (data: ContactForm
     },
   });
 
-  const sharedClasses =
-    "w-full rounded-md border bg-white px-4 py-3 " +
-    "text-neutral-800 placeholder-neutral-400 outline-none transition " +
-    "focus:ring-1 focus:ring-neutral-800 ";
-
   return (
-    <div className="mx-auto w-full max-w-md rounded-lg border border-neutral-200 p-8">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-        <div>
-          <label htmlFor="name" className="mb-2 block text-sm font-semibold text-neutral-900">
-            Your name
-          </label>
-          <Controller
-            name="name"
-            control={control}
-            render={({ field }) => (
-              <input
-                {...field}
-                id="name"
-                placeholder="Abc"
-                className={`${sharedClasses} ${errors.name ? "border-red-500" : "border-neutral-300"}`}
-              />
-            )}
-          />
-          {errors.name && <span className="text-red-500 text-xs mt-1 block">{errors.name.message}</span>}
-        </div>
+    <div className="mx-auto w-full max-w-md">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-[32px]"
+      >
+        <ContactFormField
+          label="Your name"
+          name="name"
+          control={control}
+          placeholder="Abc"
+          error={errors.name?.message}
+        />
 
-        <div>
-          <label htmlFor="email" className="mb-2 block text-sm font-semibold text-neutral-900">
-            Email address
-          </label>
-          <Controller
-            name="email"
-            control={control}
-            render={({ field }) => (
-              <input
-                {...field}
-                id="email"
-                type="email"
-                placeholder="Abc@def.com"
-                className={`${sharedClasses} ${errors.email ? "border-red-500" : "border-neutral-300"}`}
-              />
-            )}
-          />
-          {errors.email && <span className="text-red-500 text-xs mt-1 block">{errors.email.message}</span>}
-        </div>
+        <ContactFormField
+          label="Email address"
+          name="email"
+          control={control}
+          type="email"
+          placeholder="Abc@def.com"
+          error={errors.email?.message}
+        />
 
-        <div>
-          <label htmlFor="subject" className="mb-2 block text-sm font-semibold text-neutral-900">
-            Subject
-          </label>
-          <Controller
-            name="subject"
-            control={control}
-            render={({ field }) => (
-              <input
-                {...field}
-                id="subject"
-                placeholder="This is optional"
-                className={`${sharedClasses} border-neutral-300`}
-              />
-            )}
-          />
-        </div>
+        <ContactFormField
+          label="Subject"
+          name="subject"
+          control={control}
+          placeholder="This is optional"
+        />
 
-        <div>
-          <label htmlFor="message" className="mb-2 block text-sm font-semibold text-neutral-900">
-            Message
-          </label>
-          <Controller
-            name="message"
-            control={control}
-            render={({ field }) => (
-              <textarea
-                {...field}
-                id="message"
-                placeholder="Hi! I'd like to ask about"
-                rows={4}
-                className={`${sharedClasses} border-neutral-300`}
-              />
-            )}
-          />
-        </div>
+        <ContactFormField
+          label="Message"
+          name="message"
+          control={control}
+          placeholder="Hi! I'd like to ask about"
+          multiline
+        />
 
-        <button
-          type="submit"
-          className="mt-2 w-full rounded-md bg-[#B88E2F] py-3 text-sm font-medium
-                     text-white transition hover:bg-[#A07B28]"
-        >
-          Submit
-        </button>
+<div className="flex w-full justify-start">
+  <button
+    type="submit"
+    className="flex h-[55px] w-[237px] items-center justify-center
+               rounded-[5px] border border-[#B88E2F]
+               font-poppins text-[16px] font-normal
+               leading-[100%] tracking-[0%]
+               text-neutral-900 transition
+               bg-[#B88E2F] text-white"
+  >
+    <span className="flex h-[27.5px] w-[59.21px] items-center justify-center">
+      Submit
+    </span>
+  </button>
+</div>
       </form>
     </div>
   );
