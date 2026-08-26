@@ -1,11 +1,11 @@
 import toast from "react-hot-toast";
 import PageBanner from "../components/Shop/PageBanner";
 import Benefits from "../components/Benefits/Benefits";
-import ContactInfo from "./ContactInfo";
-import ContactForm from "./ContactForm";
-import type { ContactFormValues } from "./ContactForm";
+import ContactInfo from "@/components/Contact/ContactInfo";
+import ContactForm from "@/components/Contact/ContactForm";
+import type { ContactFormValues } from "@/components/Contact/ContactForm";
 
-export default function ContactPage() {
+export default function Contact() {
   function handleSubmit(data: ContactFormValues) {
     console.log("Contact form submitted:", data);
     toast.success("Message sent successfully!");

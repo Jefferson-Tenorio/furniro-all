@@ -1,15 +1,15 @@
 import { FormProvider, useForm, type FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import BillingDetails from "./BillingDetails";
-import OrderSummary from "./OrderSummary";
+import BillingDetails from "@/components/Checkout/BillingDetails";
+import OrderSummary from "@/components/Checkout/OrderSummary";
 import PageBanner from "../components/Shop/PageBanner";
 import { useNavigate } from "react-router";
 import { useCartStore } from "@/stores/cart.store";
 import { checkoutSchema, type CheckoutFormValues } from "@/types/checkout";
 import Benefits from "@/components/Benefits/Benefits";
 
-export default function CheckoutPage() {
+export default function Checkout() {
   const navigate = useNavigate();
   const clearCart = useCartStore((state) => state.clearCart);
 
