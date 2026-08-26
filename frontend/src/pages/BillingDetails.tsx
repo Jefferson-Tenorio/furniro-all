@@ -163,6 +163,7 @@ export default function BillingDetails() {
           setValue("streetAddress", response.data.logradouro || "");
           setValue("townCity", response.data.localidade || "");
           setValue("province", response.data.uf || "");
+          setValue("country", "Brasil");
           clearErrors(["streetAddress", "townCity", "province", "country"]);
         } else {
           toast.error("CEP not found");
