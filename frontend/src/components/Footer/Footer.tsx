@@ -50,7 +50,7 @@ export default function Footer() {
                 { title: "Home", href: "/" },
                 { title: "Shop", href: "/shop" },
                 { title: "About" },
-                { title: "Contact", href: "/contato" },
+                { title: "Contact", href: "/contact" },
               ]}
             />
 

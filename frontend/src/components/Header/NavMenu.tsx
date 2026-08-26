@@ -24,7 +24,7 @@ const NavMenu = ({ className, children }: NavMenuProps) => {
         Shop
       </Link>
       <a className={clsx(LinkHover)}>About</a>
-      <Link to="/contato" className={clsx(LinkHover)}>
+      <Link to="/contact" className={clsx(LinkHover)}>
         Contact
       </Link>
       {children}

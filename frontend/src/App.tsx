@@ -25,7 +25,7 @@ export default function App() {
           <Route path="/product/slug/:slug" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
-          <Route path="/contato" element={<ProtectedRoute><ContactPage /></ProtectedRoute>} />
+          <Route path="/contact" element={<ProtectedRoute><ContactPage /></ProtectedRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
