@@ -11,7 +11,7 @@ export default function ContactPage() {
 
   return (
     <div
-      className="mx-auto flex w-full max-w-6xl flex-col items-start gap-10
+      className="mx-auto flex w-full max-w-6xl flex-col items-start gap-[30px]
                  px-6 py-10 lg:flex-row lg:justify-between"
     >
       <ContactInfo />
