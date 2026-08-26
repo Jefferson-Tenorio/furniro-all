@@ -7,13 +7,13 @@ type LogoProps = {
 const Logo = ({ className }: LogoProps) => {
   return (
     <Link to="/">
-      <div className={clsx("flex gap-1.25 items-center", className)}>
+      <div className={clsx("flex items-center gap-1.25", className)}>
         <img
           src="/Logo/Logo.svg"
           alt="Logo furniro"
-          className={clsx("w-12.5 h-8")}
+          className={clsx("h-8 w-12.5")}
         />
-        <h1 className={clsx("font-montserrat font-bold text-[34px]")}>
+        <h1 className={clsx("font-montserrat text-[34px] font-bold")}>
           Furniro
         </h1>
       </div>

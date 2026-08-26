@@ -9,7 +9,7 @@ export const Cart = () => {
     <div className="mb-2">
       <PageBanner breadcrumbCurrent="Cart" breadcrumbHome="Home" title="Cart" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-7 lg:gap-7 px-4 max-w-310 mx-auto mb-21.25 mt-18">
+      <div className="mx-auto mt-18 mb-21.25 grid max-w-310 grid-cols-1 gap-y-7 px-4 lg:grid-cols-3 lg:gap-7">
         <div className="col-span-2 overflow-x-auto md:overflow-x-visible">
           <CartHeaders />
           <CartList />

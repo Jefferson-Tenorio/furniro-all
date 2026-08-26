@@ -7,17 +7,22 @@ const COOKIE_OPTIONS = {
   secure: process.env.NODE_ENV === "production",
 };
 
+interface AuthBody {
+  username?: string;
+  password?: string;
+}
+
 export class AuthController {
   constructor(private readonly service: AuthService) {}
 
   async login(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { username, password } = req.body;
+      const { username, password } = req.body as AuthBody;
       if (!username || !password) {
         res.status(400).json({ message: "Username and password are required" });
         return;
       }
-      
+
       const token = await this.service.login(username, password);
 
       res.cookie("token", token, {
@@ -37,7 +42,8 @@ export class AuthController {
 
   async logout(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const token = typeof req.cookies?.token === "string" ? req.cookies.token : undefined;
+      const token =
+        typeof req.cookies?.token === "string" ? req.cookies.token : undefined;
       await this.service.logout(token);
       res.clearCookie("token", COOKIE_OPTIONS);
       res.status(200).json({ message: "Logged out" });
@@ -46,9 +52,13 @@ export class AuthController {
     }
   }
 
-  async register(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async register(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     try {
-      const { username, password } = req.body;
+      const { username, password } = req.body as AuthBody;
       if (!username || !password) {
         res.status(400).json({ message: "Username and password are required" });
         return;

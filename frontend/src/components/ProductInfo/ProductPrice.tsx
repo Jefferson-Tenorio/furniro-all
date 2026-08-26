@@ -11,9 +11,7 @@ const ProductPrice = ({ currentPrice, oldPrice }: ProductPriceProps) => {
       </p>
 
       {oldPrice && (
-        <p className="text-[24px] text-[#B0B0B0] line-through">
-          {oldPrice}
-        </p>
+        <p className="text-[24px] text-[#B0B0B0] line-through">{oldPrice}</p>
       )}
     </div>
   );

@@ -40,6 +40,6 @@ export const useAuthStore = create<AuthState>()(
           token: state.token,
         };
       },
-    }
-  )
+    },
+  ),
 );

@@ -7,7 +7,7 @@ export function CartList() {
 
   if (isEmpty) {
     return (
-      <div className="flex mt-16 items-center justify-center text-2xl font-medium">
+      <div className="mt-16 flex items-center justify-center text-2xl font-medium">
         Your cart is empty.
       </div>
     );

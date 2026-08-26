@@ -63,11 +63,11 @@ const RightMenu = ({ className }: RightMenuProps) => {
             <span
               className={clsx(
                 "absolute -top-3 -right-3",
-                "w-4.5 h-4.5",
+                "h-4.5 w-4.5",
                 "rounded-full",
                 "bg-over-secundary",
-                "text-white text-xs font-bold",
-                "flex justify-center items-center",
+                "text-xs font-bold text-white",
+                "flex items-center justify-center",
               )}
             >
               {totalItems}

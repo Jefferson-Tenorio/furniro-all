@@ -8,23 +8,8 @@ interface ShowProps {
 
 function ShowProduct({ limit, onLimitChange, disabled }: ShowProps) {
   return (
-    <div
-      className="
-    flex
-    items-center
-    gap-3
-    sm:gap-4
-  "
-    >
-      <span
-        className="
-  font-poppins
-  text-[16px]
-  sm:text-[20px]
- "
-      >
-        Show
-      </span>
+    <div className="flex items-center gap-3 sm:gap-4">
+      <span className="font-poppins text-[16px] sm:text-[20px]">Show</span>
 
       <input
         type="number"
@@ -39,17 +24,7 @@ function ShowProduct({ limit, onLimitChange, disabled }: ShowProps) {
           }
         }}
         className={clsx(
-          `
-    h-[55px]
-    w-[55px]
-    rounded-[10px]
-    bg-white
-    text-center
-    font-poppins
-    text-[16px]
-    text-[#9F9F9F]
-    outline-none
-  `,
+          `h-[55px] w-[55px] rounded-[10px] bg-white text-center font-poppins text-[16px] text-[#9F9F9F] outline-none`,
           disabled && "cursor-not-allowed opacity-50",
         )}
       />

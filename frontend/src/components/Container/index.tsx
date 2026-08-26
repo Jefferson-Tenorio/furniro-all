@@ -7,7 +7,7 @@ type ContainerProps = {
 const Container = ({ children, className }: ContainerProps) => {
   return (
     <div className={clsx("flex justify-center", "w-full", className)}>
-      <div className={clsx("max-w-360 w-full")}>{children}</div>
+      <div className={clsx("w-full max-w-360")}>{children}</div>
     </div>
   );
 };

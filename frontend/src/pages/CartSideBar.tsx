@@ -28,22 +28,19 @@ export function CartSidebar({
     <>
       <div
         onClick={onClose}
-        className={`fixed inset-0 z-40 bg-black/30 transition-opacity duration-300
-          ${isOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        className={`fixed inset-0 z-40 bg-black/30 transition-opacity duration-300 ${isOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
         aria-hidden="true"
       />
 
       <aside
-        className={`fixed right-0 top-0 z-50 flex h-[746px] w-full max-w-[417px] flex-col
-          bg-white shadow-xl transition-transform duration-300
-          ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed top-0 right-0 z-50 flex h-[746px] w-full max-w-[417px] flex-col bg-white shadow-xl transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
         role="dialog"
         aria-label="Shopping cart"
         aria-modal="true"
       >
         {/* Header */}
-        <div className="flex items-center gap-[152px] px-7 py-[29px] max-[416px]:gap-0 max-[416px]:justify-between">
-          <h2 className="font-poppins flex h-[36px] w-[177px] items-center text-[24px] font-semibold leading-[100%] tracking-[0%] text-neutral-900">
+        <div className="flex items-center gap-[152px] px-7 py-[29px] max-[416px]:justify-between max-[416px]:gap-0">
+          <h2 className="flex h-[36px] w-[177px] items-center font-poppins text-[24px] leading-[100%] font-semibold tracking-[0%] text-neutral-900">
             Shopping Cart
           </h2>
 
@@ -62,7 +59,7 @@ export function CartSidebar({
         </div>
 
         {/* Header divider */}
-        <div className="mb-[42px] ml-[30px] mr-[100px] w-[287px] border-b border-[#D9D9D9] max-[416px]:ml-[30px] max-[416px]:mr-[30px] max-[416px]:w-auto" />
+        <div className="mr-[100px] mb-[42px] ml-[30px] w-[287px] border-b border-[#D9D9D9] max-[416px]:mr-[30px] max-[416px]:ml-[30px] max-[416px]:w-auto" />
 
         {/* Products */}
         <div className="flex-1 overflow-y-auto px-7">
@@ -91,11 +88,11 @@ export function CartSidebar({
         <div>
           <div className="px-[90px] max-[416px]:px-7">
             <div className="mt-5 flex items-center gap-[101px] max-[416px]:justify-between max-[416px]:gap-4">
-              <span className="font-poppins flex h-[24px] w-[68px] shrink-0 items-center text-[16px] font-normal leading-[100%]">
+              <span className="flex h-[24px] w-[68px] shrink-0 items-center font-poppins text-[16px] leading-[100%] font-normal">
                 Subtotal
               </span>
 
-              <span className="font-poppins flex h-[24px] min-w-[117px] shrink-0 items-center text-[16px] font-semibold leading-[100%] tracking-[0%] text-[#B88E2F]">
+              <span className="flex h-[24px] min-w-[117px] shrink-0 items-center font-poppins text-[16px] leading-[100%] font-semibold tracking-[0%] text-[#B88E2F]">
                 {formatPrice(subtotal)}
               </span>
             </div>
@@ -110,12 +107,7 @@ export function CartSidebar({
               <button
                 type="button"
                 onClick={() => handleNavigate("/cart")}
-                className="flex h-[30px] w-[87px] shrink-0 items-center justify-center gap-[10px]
-                           rounded-[50px] border border-neutral-900
-                           px-[30px] py-[6px]
-                           font-poppins text-[12px] font-normal leading-[100%]
-                           tracking-[0%] text-neutral-900 transition
-                           hover:bg-neutral-900 hover:text-white"
+                className="flex h-[30px] w-[87px] shrink-0 items-center justify-center gap-[10px] rounded-[50px] border border-neutral-900 px-[30px] py-[6px] font-poppins text-[12px] leading-[100%] font-normal tracking-[0%] text-neutral-900 transition hover:bg-neutral-900 hover:text-white"
               >
                 Cart
               </button>
@@ -123,12 +115,7 @@ export function CartSidebar({
               <button
                 type="button"
                 onClick={() => handleNavigate("/checkout")}
-                className="flex h-[30px] w-[118px] shrink-0 items-center justify-center gap-[10px]
-                           rounded-[50px] border border-neutral-900
-                           px-[30px] py-[6px]
-                           font-poppins text-[12px] font-normal leading-[100%]
-                           tracking-[0%] text-neutral-900 transition
-                           hover:bg-neutral-900 hover:text-white"
+                className="flex h-[30px] w-[118px] shrink-0 items-center justify-center gap-[10px] rounded-[50px] border border-neutral-900 px-[30px] py-[6px] font-poppins text-[12px] leading-[100%] font-normal tracking-[0%] text-neutral-900 transition hover:bg-neutral-900 hover:text-white"
               >
                 Checkout
               </button>

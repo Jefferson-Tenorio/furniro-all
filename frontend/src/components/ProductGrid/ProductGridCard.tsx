@@ -45,7 +45,7 @@ const ProductGridCard = ({ href, product }: ProductGridCardProps) => {
   const card = (
     <>
       <div
-        className="relative h-75.25 w-full bg-cover bg-center bg-no-repeat cursor-pointer"
+        className="relative h-75.25 w-full cursor-pointer bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${getImage(image)})` }}
       >
         {offer && discount !== undefined && (
@@ -56,16 +56,16 @@ const ProductGridCard = ({ href, product }: ProductGridCardProps) => {
       </div>
 
       <div className="h-36.25 px-4 pt-4">
-        <h3 className="font-poppins text-[24px] font-semibold leading-[28.8px] text-primary-text-200">
+        <h3 className="font-poppins text-[24px] leading-[28.8px] font-semibold text-primary-text-200">
           {name}
         </h3>
 
-        <p className="mt-2 font-poppins text-[16px] font-medium leading-6 text-over-card-product">
+        <p className="mt-2 font-poppins text-[16px] leading-6 font-medium text-over-card-product">
           {description}
         </p>
 
         <div className="mt-2 flex items-center gap-4">
-          <p className="font-poppins font-semibold leading-6 text-primary-text-200">
+          <p className="font-poppins leading-6 font-semibold text-primary-text-200">
             {priceWithDiscountFormatted}
           </p>
 

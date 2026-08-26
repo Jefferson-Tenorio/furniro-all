@@ -75,7 +75,9 @@ describe("Cart", () => {
       screen.getByRole("heading", { level: 1, name: "Card Totals" }),
     ).toBeInTheDocument();
     expect(screen.getAllByText("Rs. 0.00")).toHaveLength(2);
-    expect(screen.getByRole("button", { name: "Checkout" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Checkout" }),
+    ).toBeInTheDocument();
   });
 
   it("should list cart items with price, subtotal and totals", () => {
@@ -165,9 +167,7 @@ describe("Cart", () => {
     await user.click(screen.getByRole("button", { name: "Checkout" }));
 
     expect(screen.getByText("Your cart is empty!")).toBeInTheDocument();
-    expect(
-      screen.queryByText("checkout page"),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText("checkout page")).not.toBeInTheDocument();
   });
 
   it("should navigate to checkout when the cart has items", async () => {

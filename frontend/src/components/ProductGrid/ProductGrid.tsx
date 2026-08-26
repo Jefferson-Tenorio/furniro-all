@@ -11,7 +11,7 @@ const ProductGrid = ({ products, title }: ProductGridProps) => {
   return (
     <section className="flex w-full flex-col items-center px-4 pb-17.25">
       {title && (
-        <h2 className="mb-8 font-poppins text-[40px] font-bold leading-12 text-primary-text-200">
+        <h2 className="mb-8 font-poppins text-[40px] leading-12 font-bold text-primary-text-200">
           {title}
         </h2>
       )}
@@ -28,7 +28,7 @@ const ProductGrid = ({ products, title }: ProductGridProps) => {
 
       {title && (
         <Link to="/shop">
-          <button className="border border-over-secundary text-over-secundary font-bold py-3 px-19.5 transition cursor-pointer hover:bg-over-secundary hover:text-white">
+          <button className="cursor-pointer border border-over-secundary px-19.5 py-3 font-bold text-over-secundary transition hover:bg-over-secundary hover:text-white">
             Show More
           </button>
         </Link>

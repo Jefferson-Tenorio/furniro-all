@@ -24,7 +24,7 @@ export function QuantityInput({
     <div
       className={clsx(
         "inline-flex w-fit overflow-hidden rounded-[10px] border border-footer-gray",
-        className
+        className,
       )}
     >
       <button
@@ -34,7 +34,7 @@ export function QuantityInput({
         className={clsx(
           "flex cursor-pointer items-center justify-center px-3 py-3.5 transition",
           canDecrease && "hover:bg-footer-gray/10",
-          !canDecrease && "opacity-50 cursor-not-allowed"
+          !canDecrease && "cursor-not-allowed opacity-50",
         )}
       >
         -
@@ -44,7 +44,7 @@ export function QuantityInput({
         value={value}
         type="number"
         readOnly
-        className="w-10 text-center outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]"
+        className="w-10 text-center outline-none [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
       />
 
       <button
@@ -54,7 +54,7 @@ export function QuantityInput({
         className={clsx(
           "flex cursor-pointer items-center justify-center px-3 py-3.5 transition",
           canIncrease && "hover:bg-footer-gray/10",
-          !canIncrease && "opacity-50 cursor-not-allowed"
+          !canIncrease && "cursor-not-allowed opacity-50",
         )}
       >
         +

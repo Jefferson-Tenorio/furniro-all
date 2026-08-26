@@ -9,7 +9,7 @@ import {
 import Service from "../services/iService";
 import Controller from "./iController";
 
-export default class ProductController implements Controller<Product> {
+export default class ProductController implements Controller {
   constructor(
     private productService: Service<
       Product,
@@ -25,7 +25,7 @@ export default class ProductController implements Controller<Product> {
 
   private getQueryValue(value: unknown): string | undefined {
     if (typeof value === "string") return value;
-    if (Array.isArray(value) && value.length > 0) return value[0];
+    if (Array.isArray(value) && value.length > 0) return value[0] as string;
     return undefined;
   }
 

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-export default interface Controller<T> {
+export default interface Controller {
   getAll(req: Request, res: Response): Promise<void>;
   findById(req: Request, res: Response): Promise<void>;
   findBySlug(req: Request, res: Response): Promise<void>;

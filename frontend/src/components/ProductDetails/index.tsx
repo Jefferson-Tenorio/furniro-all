@@ -13,7 +13,6 @@ const ProductDetails = ({ tabs, images }: ProductDetailsProps) => {
 
   return (
     <section className="w-full border-t border-gray-400">
-
       <ProductTabs tabs={tabs} activeId={activeId} onSelect={setActiveId} />
 
       <div className="mt-10">
