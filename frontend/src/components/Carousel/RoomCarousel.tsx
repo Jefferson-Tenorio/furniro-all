@@ -41,7 +41,7 @@ const CarouselNextButton = () => {
     <button
       onClick={() => swiper.slideNext()}
       aria-label="Próxima imagem"
-      className="absolute top-1/2 -translate-y-1/2 right-4 md:right-8 bg-white hover:bg-[#B88E2F] text-[#B88E2F] hover:text-white w-12 h-12 rounded-full flex items-center justify-center z-20 shadow-lg transition-colors cursor-pointer"
+      className="absolute top-1/2 right-4 z-20 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white text-[#B88E2F] shadow-lg transition-colors hover:bg-[#B88E2F] hover:text-white md:right-8"
     >
       <FiChevronRight size={24} />
     </button>
@@ -51,23 +51,23 @@ const CarouselNextButton = () => {
 export default function RoomCarousel() {
   return (
     <section className="bg-[#FCF8F3] py-12 md:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8 relative">
-        <div className="md:w-1/3 text-center md:text-left flex flex-col items-center md:items-start relative z-20 bg-[#FCF8F3] md:bg-transparent">
-          <h2 className="text-3xl md:text-[40px] leading-tight font-bold text-black mb-4 font-sans">
+      <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 sm:px-6 md:flex-row lg:px-8">
+        <div className="relative z-20 flex flex-col items-center bg-[#FCF8F3] text-center md:w-1/3 md:items-start md:bg-transparent md:text-left">
+          <h2 className="mb-4 font-sans text-3xl leading-tight font-bold text-black md:text-[40px]">
             50+ Beautiful rooms inspiration
           </h2>
-          <p className="text-[#616161] mb-8 text-sm md:text-base">
+          <p className="mb-8 text-sm text-[#616161] md:text-base">
             Our designer already made a lot of beautiful prototypes of rooms
             that inspire you
           </p>
           <Link to="/shop">
-            <button className="bg-[#B88E2F]  hover:bg-secundary hover:text-over-secundary border-2 border-over-secundary text-white font-bold py-3 px-8 transition-colors cursor-pointer">
+            <button className="cursor-pointer border-2 border-over-secundary bg-[#B88E2F] px-8 py-3 font-bold text-white transition-colors hover:bg-secundary hover:text-over-secundary">
               Explore More
             </button>
           </Link>
         </div>
 
-        <div className="md:w-2/3 w-full relative">
+        <div className="relative w-full md:w-2/3">
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={24}
@@ -92,23 +92,23 @@ export default function RoomCarousel() {
                     <img
                       src={getImage(room.image)}
                       alt={room.title}
-                      className="w-full h-full object-cover shadow-md"
+                      className="h-full w-full object-cover shadow-md"
                     />
 
                     {isActive && (
                       <>
-                        <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm p-6 flex flex-col justify-center gap-1 z-10 w-[220px] h-[130px] shadow-sm animate-fade-in">
-                          <div className="flex items-center gap-2 text-[#616161] text-sm font-medium">
+                        <div className="animate-fade-in absolute bottom-6 left-6 z-10 flex h-[130px] w-[220px] flex-col justify-center gap-1 bg-white/90 p-6 shadow-sm backdrop-blur-sm">
+                          <div className="flex items-center gap-2 text-sm font-medium text-[#616161]">
                             <span>0{room.id}</span>
-                            <span className="w-4 h-px bg-[#616161]"></span>
+                            <span className="h-px w-4 bg-[#616161]"></span>
                             <span>{room.category}</span>
                           </div>
-                          <h3 className="text-black font-semibold text-2xl">
+                          <h3 className="text-2xl font-semibold text-black">
                             {room.title}
                           </h3>
                         </div>
 
-                        <button className="absolute bottom-6 left-[246px] bg-[#B88E2F] text-white w-12 h-12 flex items-center justify-center z-10 animate-fade-in cursor-pointer">
+                        <button className="animate-fade-in absolute bottom-6 left-[246px] z-10 flex h-12 w-12 cursor-pointer items-center justify-center bg-[#B88E2F] text-white">
                           <FiArrowRight size={24} />
                         </button>
                       </>

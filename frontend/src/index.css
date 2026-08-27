@@ -2,26 +2,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 
-:root{
-  --primary: #FFF;
+:root {
+  --primary: #fff;
   --over-primary: #000;
 
-  --secundary: #FFF3E3;
-  --over-secundary: #B88E2F;
+  --secundary: #fff3e3;
+  --over-secundary: #b88e2f;
 
-  --inspiration: #FCF8F3;
+  --inspiration: #fcf8f3;
 
-  --card-product: #F4F5F7;
+  --card-product: #f4f5f7;
   --over-card-product: #898989;
 
   --primary-text: #333;
   --primary-text-100: #666;
-  --primaty-text-200: #3A3A3A;
+  --primaty-text-200: #3a3a3a;
 
   --footer: #d9d9d9;
   --footer-gray: #9f9f9f;
 
-  --cart: #F9F1E7;
+  --cart: #f9f1e7;
 }
 
 @theme {
@@ -46,10 +46,10 @@
 
   --color-footer-gray: var(--footer-gray);
   --color-footer: var(--footer);
-  
+
   --color-cart: var(--cart);
 
-   --animate-slide-loop: loop 40s linear infinite;
+  --animate-slide-loop: loop 40s linear infinite;
 
   @keyframes loop {
     from {
@@ -59,13 +59,11 @@
       transform: translateX(-50%);
     }
   }
-  
 }
 
-  
 @keyframes slideIn {
   from {
-    opacity: 0.8 ;
+    opacity: 0.8;
     transform: translateX(24px);
   }
 

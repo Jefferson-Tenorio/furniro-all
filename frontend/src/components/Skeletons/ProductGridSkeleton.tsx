@@ -12,7 +12,7 @@ export const ProductGridSkeleton = ({
   return (
     <section className="flex w-full flex-col items-center px-4 pb-17.25">
       {title && (
-        <h2 className="mb-8 font-poppins text-[40px] font-bold leading-12 text-primary-text-200">
+        <h2 className="mb-8 font-poppins text-[40px] leading-12 font-bold text-primary-text-200">
           {title}
         </h2>
       )}

@@ -6,7 +6,6 @@ import { beforeEach, beforeAll, describe, expect, it, vi } from "vitest";
 import { useCartStore, type CartItem } from "@/stores/cart.store";
 import { Cart } from "./Cart";
 
-// jsdom does not implement matchMedia, required by react-hot-toast's real <Toaster />
 beforeAll(() => {
   Object.defineProperty(window, "matchMedia", {
     writable: true,
@@ -48,6 +47,7 @@ function renderCart() {
     <MemoryRouter initialEntries={["/cart"]}>
       <Routes>
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<div>checkout page</div>} />
       </Routes>
       <Toaster />
     </MemoryRouter>,
@@ -75,7 +75,9 @@ describe("Cart", () => {
       screen.getByRole("heading", { level: 1, name: "Card Totals" }),
     ).toBeInTheDocument();
     expect(screen.getAllByText("Rs. 0.00")).toHaveLength(2);
-    expect(screen.getByRole("button", { name: "Checkout" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Checkout" }),
+    ).toBeInTheDocument();
   });
 
   it("should list cart items with price, subtotal and totals", () => {
@@ -119,18 +121,18 @@ describe("Cart", () => {
     expect(screen.getByText("Rs. 1,750.00")).toBeInTheDocument();
   });
 
-  it("should remove the item when its quantity reaches zero", async () => {
+  it("should disable the minus button when the quantity reaches one", async () => {
     const user = userEvent.setup();
     useCartStore.setState({ items: [itemWithDiscount] });
     renderCart();
 
+    const decreaseButton = screen.getByRole("button", { name: "-" });
+    expect(decreaseButton).toBeDisabled();
+
+    await user.click(decreaseButton);
+
     expect(screen.getByText("Syltherine")).toBeInTheDocument();
-
-    await user.click(screen.getByRole("button", { name: "-" }));
-
-    expect(screen.queryByText("Syltherine")).not.toBeInTheDocument();
-    expect(screen.queryByRole("spinbutton")).not.toBeInTheDocument();
-    expect(screen.getAllByText("Rs. 0.00")).toHaveLength(2);
+    expect(screen.getByRole("spinbutton")).toHaveValue(1);
   });
 
   it("should remove an item when clicking the trash icon", async () => {
@@ -158,17 +160,23 @@ describe("Cart", () => {
     expect(screen.getByText("Rs. 3,750.00")).toBeInTheDocument();
   });
 
-  it("should checkout, clear the cart and show the success toast", async () => {
+  it("should block checkout with an error toast when the cart is empty", async () => {
+    const user = userEvent.setup();
+    renderCart();
+
+    await user.click(screen.getByRole("button", { name: "Checkout" }));
+
+    expect(screen.getByText("Your cart is empty!")).toBeInTheDocument();
+    expect(screen.queryByText("checkout page")).not.toBeInTheDocument();
+  });
+
+  it("should navigate to checkout when the cart has items", async () => {
     const user = userEvent.setup();
     useCartStore.setState({ items: [itemWithDiscount] });
     renderCart();
 
     await user.click(screen.getByRole("button", { name: "Checkout" }));
 
-    expect(
-      screen.getByText("check out realizado com sucesso!"),
-    ).toBeInTheDocument();
-    expect(screen.queryByText("Syltherine")).not.toBeInTheDocument();
-    expect(screen.getAllByText("Rs. 0.00")).toHaveLength(2);
+    expect(screen.getByText("checkout page")).toBeInTheDocument();
   });
 });

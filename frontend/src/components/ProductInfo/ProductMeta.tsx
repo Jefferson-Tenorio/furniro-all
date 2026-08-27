@@ -31,7 +31,7 @@ const ProductMeta = ({ sku, category }: ProductMetaProps) => {
           <tr>
             <td className="pr-8">Share</td>
             <td className="pr-3">:</td>
-            <td className="flex items-center gap-3 text-black items-center">
+            <td className="flex items-center gap-3 text-black">
               <IconLink
                 href="https://www.facebook.com/airevolutioncompany/"
                 iconSrc="/Icons/facebook-icon.svg"

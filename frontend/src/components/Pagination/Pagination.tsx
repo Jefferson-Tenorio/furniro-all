@@ -32,15 +32,7 @@ function Pagination({ limit, total, offset, onPageChange }: PaginationProps) {
   };
 
   return (
-    <div
-      className="
-               flex
-               justify-center
-               items-center
-               gap-[38px]
-               py-[15px]
-        "
-    >
+    <div className="flex items-center justify-center gap-[38px] py-[15px]">
       {Array.from({ length: totalPages }, (_, index) => {
         const page = index + 1;
 
@@ -48,22 +40,11 @@ function Pagination({ limit, total, offset, onPageChange }: PaginationProps) {
           <button
             key={page}
             onClick={() => handlePageChange(page)}
-            className={`
-                            w-12 h-12
-                            sm:w-[60px] sm:h-[60px]
-                            rounded-[10px]
-                            font-poppins
-                            font-normal
-                            cursor-pointer
-                            text-[20px]
-                            leading-[30px]
-                            transition
-                            ${
-                              currentPage === page
-                                ? "bg-[#B88E2F] text-white"
-                                : "bg-[#F9F1E7] text-black"
-                            }
-                        `}
+            className={`h-12 w-12 cursor-pointer rounded-[10px] font-poppins text-[20px] leading-[30px] font-normal transition sm:h-[60px] sm:w-[60px] ${
+              currentPage === page
+                ? "bg-[#B88E2F] text-white"
+                : "bg-[#F9F1E7] text-black"
+            } `}
           >
             {page}
           </button>
@@ -72,19 +53,7 @@ function Pagination({ limit, total, offset, onPageChange }: PaginationProps) {
 
       <button
         onClick={handleNext}
-        className="
-                    w-[80px] h-12
-                    sm:w-[98px] sm:h-[60px]
-                    rounded-[10px]
-                    font-poppins
-                    font-normal
-                    text-[20px]
-                    cursor-pointer
-                    leading-[30px]
-                    bg-[#F9F1E7]
-                    text-black
-                    transition
-                "
+        className="h-12 w-[80px] cursor-pointer rounded-[10px] bg-[#F9F1E7] font-poppins text-[20px] leading-[30px] font-normal text-black transition sm:h-[60px] sm:w-[98px]"
       >
         Next
       </button>

@@ -22,50 +22,23 @@ function Filter({ category, onChange, disabled }: FilterProps) {
         type="button"
         onClick={() => !disabled && setIsOpen((prev) => !prev)}
         className={clsx(
-          "flex items-center gap-3 hover:text-gray-600 transition",
+          "flex items-center gap-3 transition hover:text-gray-600",
           disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
         )}
       >
         <img src="/IconsShopTool/filter.svg" alt="Filter" />
 
-        <span
-          className="
-            font-poppins
-            text-base
-            sm:text-[20px]
-          "
-        >
-          Filter
-        </span>
+        <span className="font-poppins text-base sm:text-[20px]">Filter</span>
       </button>
 
       {isOpen && (
-        <div
-          className="
-            absolute left-0 top-full z-20
-            mt-3 w-44
-            rounded-md
-            bg-white
-            shadow-lg
-          "
-        >
+        <div className="absolute top-full left-0 z-20 mt-3 w-44 rounded-md bg-white shadow-lg">
           {CATEGORIES_OPTIONS.map((item) => (
             <button
               key={item.value}
               type="button"
               onClick={() => handleSelect(item.value)}
-              className={`
-                w-full
-                px-4 py-3
-                text-left
-                font-poppins
-                transition
-                cursor-pointer
-
-                hover:bg-[#F9F1E7]
-
-                ${category === item.value ? "bg-[#F9F1E7] font-medium" : ""}
-              `}
+              className={`w-full cursor-pointer px-4 py-3 text-left font-poppins transition hover:bg-[#F9F1E7] ${category === item.value ? "bg-[#F9F1E7] font-medium" : ""} `}
             >
               {item.label}
             </button>

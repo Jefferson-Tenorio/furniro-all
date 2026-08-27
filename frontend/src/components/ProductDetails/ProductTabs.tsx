@@ -41,7 +41,7 @@ const ProductTabs = ({ tabs, activeId, onSelect }: ProductTabsProps) => {
     <div
       role="tablist"
       onKeyDown={handleKeyDown}
-      className="flex flex-wrap justify-center gap-6 sm:gap-16 pt-[49px]"
+      className="flex flex-wrap justify-center gap-6 pt-[49px] sm:gap-16"
     >
       {tabs.map((tab) => {
         const isActive = tab.id === activeId;

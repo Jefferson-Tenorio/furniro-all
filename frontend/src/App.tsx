@@ -6,6 +6,11 @@ import { Home } from "./pages/Home";
 import { Shop } from "./pages/Shop";
 import { SingleProduct } from "./pages/SingleProduct";
 import { NotFound } from "./components/NotFound";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
+import Checkout from "./pages/Checkout";
+import Contact from "./pages/Contact";
 
 export default function App() {
   return (
@@ -19,6 +24,24 @@ export default function App() {
           <Route path="/product/:id" element={<SingleProduct />} />
           <Route path="/product/slug/:slug" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <ProtectedRoute>
+                <Contact />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

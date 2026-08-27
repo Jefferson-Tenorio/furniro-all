@@ -23,10 +23,7 @@ export function QuantitySelector({
         value={value}
         type="number"
         readOnly
-        className=" w-10 text-center outline-none
-                   [&::-webkit-inner-spin-button]:appearance-none
-                   [&::-webkit-outer-spin-button]:appearance-none
-                   [-moz-appearance:textfield]"
+        className="w-10 text-center outline-none [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
       />
 
       <button

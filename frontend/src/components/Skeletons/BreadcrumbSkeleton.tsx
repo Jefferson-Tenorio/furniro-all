@@ -9,11 +9,11 @@ export const BreadcrumbSkeleton = ({ className }: BreadcrumbSkeletonProps) => {
     <nav
       aria-label="Breadcrumb"
       className={clsx(
-        "flex h-25 w-full items-center px-4 sm:px-8 lg:px-25 font-poppins",
+        "flex h-25 w-full items-center px-4 font-poppins sm:px-8 lg:px-25",
         className,
       )}
     >
-      <ol className="flex flex-wrap items-center gap-6 animate-pulse">
+      <ol className="flex animate-pulse flex-wrap items-center gap-6">
         <li className="h-4 w-12 rounded bg-gray-300" />
 
         <li className="h-3 w-3 rounded bg-gray-300" />

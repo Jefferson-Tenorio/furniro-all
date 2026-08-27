@@ -21,7 +21,7 @@ export default function CategoryCard({
           src={image}
           alt={alt}
         />
-        <h2 className="text-primary-text mt-7.5 text-xl font-semibold sm:text-2xl">
+        <h2 className="mt-7.5 text-xl font-semibold text-primary-text sm:text-2xl">
           {title}
         </h2>
       </div>

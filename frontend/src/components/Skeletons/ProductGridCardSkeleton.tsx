@@ -1,6 +1,6 @@
 export const ProductGridCardSkeleton = () => {
   return (
-    <article className="relative min-w-71.25 overflow-hidden bg-card-product animate-pulse">
+    <article className="relative min-w-71.25 animate-pulse overflow-hidden bg-card-product">
       <div className="h-75.25 w-full bg-gray-300" />
 
       <div className="h-36.25 px-4 pt-4">
