@@ -14,10 +14,14 @@ type FormFieldProps<T extends FieldValues> = {
   type?: string;
   options?: string[];
   onChangeInterceptor?: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => void;
   onBlurInterceptor?: (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.FocusEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => void;
 };
 
@@ -84,13 +88,17 @@ export function FormField<T extends FieldValues>({
           const handlers = {
             onFocus: () => setFocused(true),
             onChange: (
-              e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+              e: React.ChangeEvent<
+                HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+              >,
             ) => {
               field.onChange(e);
               onChangeInterceptor?.(e);
             },
             onBlur: (
-              e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+              e: React.FocusEvent<
+                HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+              >,
             ) => {
               setFocused(false);
               field.onBlur();
