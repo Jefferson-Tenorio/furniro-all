@@ -47,7 +47,6 @@ Based on my own repository, linked here: https://github.com/Jefferson-Tenorio/ap
 
 <table cellspacing="0" cellpadding="0" border="0" style=" border-collapse: collapse; border-spacing: 0; border: 0; margin: 0; padding: 0; " > <tr style=" border: 0; margin: 0; padding: 0; ">
 
-```
 <td
   align="center"
   valign="top"
@@ -231,7 +230,6 @@ Based on my own repository, linked here: https://github.com/Jefferson-Tenorio/ap
     <strong>Logout</strong>
   </div>
 </td>
-```
 
 </tr> </table>
 
