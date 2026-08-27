@@ -1,304 +1,266 @@
-# Desafio 2 — Furniro (AWS FDE Node.js + React)
+# Furniro
 
-Este repositório contém o desafio 2 da Fase 2 do programa AWS FDE Node.js + React da Compass UOL AI/R. O projeto inclui duas partes principais:
+Final challenge of the Compass internship program. Requirements: authentication, checkout page, contact page, and cart sidebar.
 
-- `backend/` — API RESTful em Node.js, Express, TypeScript e Prisma
-- `frontend/` — aplicação React + TypeScript com Vite, Tailwind
+## How to run
+
+```bash
+npm install
+npm run setup
+```
+
+### Commands
+
+| Comando            | O que faz                                                        |
+| ------------------ | ---------------------------------------------------------------- |
+| `npm run setup`    | Prepara o projeto do zero (env, dependências, migrations e seed) |
+| `npm run dev`      | Sobe backend e frontend juntos                                   |
+| `npm run doctor`   | Verifica se o ambiente está correto                              |
+| `npm run check`    | Executa lint, typecheck, testes e build dos dois lados           |
+| `npm run db:reset` | Remove o banco, reaplica as migrations e executa o seed          |
+| `npm run db:seed`  | Popula o banco com produtos e usuários de teste                  |
+| `npm run clean`    | Remove node_modules, dist e coverage                             |
 
 ---
 
-<div align="center">
+# Too Long Don't Read
 
-## 📑 Sumário / Table of Contents
+## Authentication
 
-**🇧🇷 [Português](#português)** &nbsp;•&nbsp; **🇺🇸 [English](#english)**
+Based on my own repository, linked here: https://github.com/Jefferson-Tenorio/api-security-in-action-typescript
 
-[Visão geral](#visão-geral) &nbsp;•&nbsp;
-[Backend](#backend) &nbsp;•&nbsp;
-[Frontend](#frontend) &nbsp;•&nbsp;
-[Arquitetura](#arquitetura) &nbsp;•&nbsp;
-[Autores](#autores)
+> JWT authentication system combining an HttpOnly cookie with a Bearer token, session state kept in Zustand and persisted to localStorage, and a JTI denylist for token revocation on logout. Protected routes use a wrapper component that redirects unauthenticated users to `/login`, preserving the original destination via `location.state`.
 
-[Overview](#overview) &nbsp;•&nbsp;
-[Backend](#backend-1) &nbsp;•&nbsp;
-[Frontend](#frontend-1) &nbsp;•&nbsp;
-[Architecture](#architecture) &nbsp;•&nbsp;
-[Authors](#authors)
+## Cart Side bar
 
-</div>
+> A side drawer controlled by its parent component (`isOpen`/`onClose`), reading items and subtotal directly from `useCartStore` (Zustand) through individual selectors. The item list is rendered with a memoized component (`SidebarCartItem`), item removal goes through the store's `removeItem`, and navigation to `/cart` or `/checkout` closes the drawer before redirecting.
 
----
+## Checkout Page
 
-## Português
+> An 11-field address form plus payment method selection, backed by a single page-level `useForm` distributed to children via `FormProvider`/`useFormContext`. Address auto-fill from the ZIP code (CEP) fires on blur, querying the ViaCEP API. Validation runs through Zod; on submit, the cart is cleared and the user is redirected home after 2 seconds.
 
-## Visão geral
+## Contact Page
 
-O desafio consiste em uma API backend e um frontend conectado, construídos para um e-commerce de móveis. O backend usa SQLite via Prisma, e o frontend consome dados pela API.
+> A 4-field form (name, email, subject, message) with its own `useForm` instance, independent of any page-level context. Validation runs through Zod (name and email required, subject and message optional); on submit it fires the `onSubmit` callback received as a prop and shows a confirmation toast.
 
-## Quick Start
+# Authentication
 
-Pré-requisito: [Node.js](https://nodejs.org) >= 22.
+<table cellspacing="0" cellpadding="0" border="0" style=" border-collapse: collapse; border-spacing: 0; border: 0; margin: 0; padding: 0; " > <tr style=" border: 0; margin: 0; padding: 0; ">
 
-Na raiz do repositório:
+```
+<td
+  align="center"
+  valign="top"
+  style="
+    border: 0;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+  "
+>
+  <a
+    href="docs/Login.svg"
+    style="
+      margin: 0;
+      padding: 0;
+      border: 0;
+      line-height: 0;
+    "
+  >
+    <img
+      src="docs/Login.svg"
+      width="220"
+      height="300"
+      style="
+        display: block;
+        width: 220px;
+        height: 300px;
+        object-fit: cover;
+        object-position: top;
+        margin: 0;
+        padding: 0;
+        border: 0;
+      "
+    >
+  </a>
 
-```bash
-npm run setup   # cria .env, instala dependências, roda migrations e seed
-npm run dev     # sobe a API (:3000) e o frontend (:5173) juntos
+  <div style="
+    margin: 0;
+    padding: 0;
+    border: 0;
+    line-height: 1;
+  ">
+    <strong>Login</strong>
+  </div>
+</td>
+
+<td
+  align="center"
+  valign="top"
+  style="
+    border: 0;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+  "
+>
+  <a
+    href="docs/Register.svg"
+    style="
+      margin: 0;
+      padding: 0;
+      border: 0;
+      line-height: 0;
+    "
+  >
+    <img
+      src="docs/Register.svg"
+      width="220"
+      height="300"
+      style="
+        display: block;
+        width: 220px;
+        height: 300px;
+        object-fit: cover;
+        object-position: top;
+        margin: 0;
+        padding: 0;
+        border: 0;
+      "
+    >
+  </a>
+
+  <div style="
+    margin: 0;
+    padding: 0;
+    border: 0;
+    line-height: 1;
+  ">
+    <strong>Register</strong>
+  </div>
+</td>
+
+<td
+  align="center"
+  valign="top"
+  style="
+    border: 0;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+  "
+>
+  <a
+    href="docs/Request.svg"
+    style="
+      margin: 0;
+      padding: 0;
+      border: 0;
+      line-height: 0;
+    "
+  >
+    <img
+      src="docs/Request.svg"
+      width="220"
+      height="300"
+      style="
+        display: block;
+        width: 220px;
+        height: 300px;
+        object-fit: cover;
+        object-position: top;
+        margin: 0;
+        padding: 0;
+        border: 0;
+      "
+    >
+  </a>
+
+  <div style="
+    margin: 0;
+    padding: 0;
+    border: 0;
+    line-height: 1;
+  ">
+    <strong>Request</strong>
+  </div>
+</td>
+
+<td
+  align="center"
+  valign="top"
+  style="
+    border: 0;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+  "
+>
+  <a
+    href="docs/Logout.svg"
+    style="
+      margin: 0;
+      padding: 0;
+      border: 0;
+      line-height: 0;
+    "
+  >
+    <img
+      src="docs/Logout.svg"
+      width="220"
+      height="300"
+      style="
+        display: block;
+        width: 220px;
+        height: 300px;
+        object-fit: cover;
+        object-position: top;
+        margin: 0;
+        padding: 0;
+        border: 0;
+      "
+    >
+  </a>
+
+  <div style="
+    margin: 0;
+    padding: 0;
+    border: 0;
+    line-height: 1;
+  ">
+    <strong>Logout</strong>
+  </div>
+</td>
 ```
 
-Abra `http://localhost:5173` no navegador.
+</tr> </table>
 
-> Se algo parecer quebrado no seu ambiente, rode `npm run doctor` para diagnosticar.
+Login generates a JWT signed with HS256, containing `userId`, `username`, a `jti` unique to each token (via `crypto.randomUUID()`), plus the standard expiration, issuer, and audience claims — all validated on verification, not just the signature. The token travels in an HttpOnly cookie with `SameSite=Strict` (mitigating CSRF), and in parallel a copy is mirrored into Zustand and persisted to localStorage, used only for UI reactivity and so the Axios interceptor can build the `Authorization: Bearer` header. In other words, every authenticated request carries the token twice — once automatically via the cookie, once explicitly via the header — which is redundant, but it guarantees the backend accepts both cookie-based and header-based clients without coupling the middleware to a single strategy. Login is rate-limited to 5 attempts per 15 minutes (registration: 100), and logout doesn't just clear local state: the token's `jti` goes into a denylist table along with its expiration, and the authentication middleware checks that table on every request — so a token stolen before logout becomes invalid immediately after, not only once it naturally expires. The open issue is purging that denylist: expired entries aren't removed automatically, so the table grows indefinitely with no cleanup routine.
 
-### Comandos úteis
+# Cartsidebar
 
-| Comando            | O que faz                                                       |
-| ------------------ | --------------------------------------------------------------- |
-| `npm run setup`    | Prepara o projeto do zero (env, dependências, migrations, seed) |
-| `npm run dev`      | Sobe backend e frontend juntos                                  |
-| `npm run doctor`   | Verifica se o ambiente está correto                             |
-| `npm run check`    | Lint + typecheck + testes + build dos dois lados                |
-| `npm run db:reset` | Dropa o banco, reaplica migrations e roda o seed                |
-| `npm run db:seed`  | Popula o banco com produtos e usuários de teste                 |
-| `npm run clean`    | Remove `node_modules`, `dist` e `coverage`                      |
+<img src="docs/cartside.png">
 
-Usuários criados pelo seed para testar login: `admin / admin123` e `user / user123`.
+This is a drawer controlled from the outside — it receives `isOpen` and `onClose` from `RightMenu` and doesn't manage its own open state. Every piece of data comes from individual `useCartStore` selectors (`items`, `removeItem`, `getSubtotal`), which avoids prop drilling but couples the component to how the store is structured. The animation uses `translate-x` instead of manipulating `right`, which is lighter since it runs on the GPU instead of forcing a reflow. Two decisions are worth noting because they're deliberate trade-offs, not things discovered after the fact: the panel height is fixed in pixels (`746px`), which matches the design exactly but breaks on smaller screens; and the subtotal uses `getSubtotal()`, which ignores discounts — the store has a `getTotal()` that applies discounts, but it isn't used here, creating an inconsistency between the value shown in the sidebar and the actual order total. There's also no focus trap: `aria-modal="true"` is present, but keyboard focus normally escapes the drawer, and there's no Esc-to-close.
 
-## Backend
+# Checkout
 
-### Como rodar
+<img src="docs/checkout.png">
 
-A forma recomendada é pela raiz (`npm run setup` + `npm run dev`). Para rodar manualmente:
+Eleven address fields live under a single page-level `useForm`, distributed to children via `FormProvider` — a decision that only pays off past a certain field count; for a small form, passing `control` directly would be simpler. The standout feature is CEP (Brazilian ZIP code) auto-fill: on field blur (not on every keystroke, avoiding rate limits on ViaCEP's public API), a request fetches the street, city, and state and populates the corresponding fields via `setValue`, clearing any validation errors already shown. This is deliberately tied to Brazil — there's no fallback for other countries. Payment method selection uses custom buttons controlled by `Controller` instead of native `<input type="radio">`, which gives full visual control but costs accessibility: there's no `role="radio"`, no `aria-checked`, and no arrow-key navigation — the most serious gap documented in the whole flow. The same discount-ignoring issue from the Cart Sidebar repeats here, and the entire submit step is a placeholder: the data goes to `console.log`, the cart is cleared, and the user is redirected after 2 seconds, with no real API call.
 
-```bash
-cd backend
-npm install
-cp .env.example .env
-npm run db:migrate
-npm run db:seed
-npm run dev
-```
+# Contact
 
-A API ficará disponível em:
+<img src="docs/contact.png">
 
-```txt
-http://localhost:3000
-```
+Unlike Checkout, the decision here was not to share form context — `ContactForm` creates its own `useForm` instance, isolated from any parent component, because there's no second form on the same page to justify a shared provider. Even so, it uses the same `FormField` component as Checkout, keeping the visual identity identical between the two without duplicating styles. Validation only requires name and email; subject and message are optional, with no minimum character length and no spam protection at all (no honeypot, no rate limit) — the form accepts repeated programmatic submissions with zero friction. Just like Checkout, there's no real API call: submitting fires a success toast and nothing else, and there's no loading state or button-disable during submission, which leaves room for a double submit on slow connections.
 
-### Principais endpoints
+# Stack
 
-- `GET /health` — status da aplicação e do banco
-- `GET /products`
-- `GET /products/:id`
-- `GET /products/slug/:slug`
-- `POST /products`
-- `PUT /products/:id`
-- `DELETE /products/:id`
+#### Frontend
 
-O endpoint `GET /products` suporta filtros e paginação por meio de query params como `category`, `_page`, `_limit`, `_sort` e `_order`.
+[![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)](#) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](#) [![Vite](https://img.shields.io/badge/Vite-20232A?style=flat-square&logo=vite&logoColor=646CFF)](#) [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-20232A?style=flat-square&logo=tailwindcss&logoColor=38BDF8)](#) [![React Router](https://img.shields.io/badge/React_Router-20232A?style=flat-square&logo=reactrouter&logoColor=CA4245)](#) [![Zustand](https://img.shields.io/badge/Zustand-20232A?style=flat-square&logo=react&logoColor=white)](#) [![React Hook Form](https://img.shields.io/badge/React_Hook_Form-20232A?style=flat-square&logo=reacthookform&logoColor=EC5990)](#) [![Zod](https://img.shields.io/badge/Zod-20232A?style=flat-square&logo=zod&logoColor=3E67B1)](#) [![Axios](https://img.shields.io/badge/Axios-20232A?style=flat-square&logo=axios&logoColor=5A29E4)](#) [![Swiper](https://img.shields.io/badge/Swiper-20232A?style=flat-square&logo=swiper&logoColor=6332F6)](#) [![Vitest](https://img.shields.io/badge/Vitest-20232A?style=flat-square&logo=vitest&logoColor=6E9F18)](#) [![Testing_Library](https://img.shields.io/badge/Testing_Library-20232A?style=flat-square&logo=testinglibrary&logoColor=E33332)](#) [![ESLint](https://img.shields.io/badge/ESLint-20232A?style=flat-square&logo=eslint&logoColor=4B32C3)](#)
 
-## Frontend
+#### Backend
 
-### Como rodar
-
-```bash
-cd frontend
-npm install
-cp .env.example .env
-npm run dev
-```
-
-A aplicação ficará disponível em:
-
-```txt
-http://localhost:5173
-```
-
-### Como rodar os testes e observar a cobertura
-
-```bash
-npm run test:coverage
-```
-
-Ou use `npm run check` na raiz para validar lint, tipos, testes e build de uma vez.
-
-### Principais rotas
-
-- `/` — Home
-- `/shop` — Loja
-- `/shop/:category` — Loja por categoria
-- `/product/:id` — Produto por ID
-- `/product/slug/:slug` — Produto por slug
-- `/cart` — Carrinho
-
-## Arquitetura
-
-### Backend
-
-Organizado em camadas para facilitar a manutenção:
-
-- `src/controllers`
-- `src/services`
-- `src/repositories`
-- `src/routes`
-- `src/factories`
-- `src/model`
-- `src/exceptions`
-
-### Frontend
-
-Principais pastas:
-
-- `src/components`
-- `src/hooks`
-- `src/services`
-- `src/stores`
-- `src/config`
-- `src/types`
-- `src/utils`
-
-## Autores
-
-- [Bruna Narciso](https://github.com/Bruna-Narciso)
-- [Bryan Belo](https://github.com/Badadia)
-- [Gian Lucas](https://github.com/gkgiann)
-- [Jefferson Tenório](https://github.com/Jefferson-Tenorio)
-- [Tulio Vasconcelos](https://github.com/heytulio)
-
----
-
-## English
-
-## Overview
-
-This challenge consists of a backend API and a connected frontend built for a furniture e-commerce. The backend uses SQLite via Prisma, and the frontend consumes data either from the API.
-
-## Quick Start
-
-Prerequisite: [Node.js](https://nodejs.org) >= 22.
-
-From the repository root:
-
-```bash
-npm run setup   # creates .env, installs dependencies, runs migrations and seed
-npm run dev     # starts the API (:3000) and the frontend (:5173) together
-```
-
-Open `http://localhost:5173` in your browser.
-
-> If something seems off with your environment, run `npm run doctor` to diagnose it.
-
-### Useful commands
-
-| Command            | What it does                                                    |
-| ------------------ | --------------------------------------------------------------- |
-| `npm run setup`    | Prepares the project from scratch (env, deps, migrations, seed) |
-| `npm run dev`      | Starts backend and frontend together                            |
-| `npm run doctor`   | Checks whether the environment is correct                       |
-| `npm run check`    | Lint + typecheck + tests + build for both sides                 |
-| `npm run db:reset` | Drops the database, re-applies migrations and runs the seed     |
-| `npm run db:seed`  | Populates the database with products and test users             |
-| `npm run clean`    | Removes `node_modules`, `dist` and `coverage`                   |
-
-Users created by the seed for login testing: `admin / admin123` and `user / user123`.
-
-## Backend
-
-### How to run
-
-The recommended way is from the root (`npm run setup` + `npm run dev`). To run manually:
-
-```bash
-cd backend
-npm install
-cp .env.example .env
-npm run db:migrate
-npm run db:seed
-npm run dev
-```
-
-The API will be available at:
-
-```txt
-http://localhost:3000
-```
-
-### Main endpoints
-
-- `GET /health` — application and database status
-- `GET /products`
-- `GET /products/:id`
-- `GET /products/slug/:slug`
-- `POST /products`
-- `PUT /products/:id`
-- `DELETE /products/:id`
-
-The `GET /products` endpoint supports filtering and pagination through query params such as `category`, `_page`, `_limit`, `_sort`, and `_order`.
-
-## Frontend
-
-### How to run
-
-```bash
-cd frontend
-npm install
-cp .env.example .env
-npm run dev
-```
-
-The application will be available at:
-
-```txt
-http://localhost:5173
-```
-
-### How to run Tests and see coverage
-
-```bash
-npm run test:coverage
-```
-
-Or use `npm run check` from the root to validate lint, types, tests and build at once.
-
-### Main routes
-
-- `/` — Home
-- `/shop` — Shop
-- `/shop/:category` — Shop by category
-- `/product/:id` — Product by ID
-- `/product/slug/:slug` — Product by slug
-- `/cart` — Cart
-
-## Architecture
-
-### Backend
-
-Organized in layers for maintainability:
-
-- `src/controllers`
-- `src/services`
-- `src/repositories`
-- `src/routes`
-- `src/factories`
-- `src/model`
-- `src/exceptions`
-
-### Frontend
-
-Main folders:
-
-- `src/components`
-- `src/hooks`
-- `src/services`
-- `src/stores`
-- `src/config`
-- `src/types`
-- `src/utils`
-
-## Authors
-
-- [Bruna Narciso](https://github.com/Bruna-Narciso)
-- [Bryan Belo](https://github.com/Badadia)
-- [Gian Lucas](https://github.com/gkgiann)
-- [Jefferson Tenório](https://github.com/Jefferson-Tenorio)
-- [Tulio Vasconcelos](https://github.com/heytulio)
+[![Node.js](https://img.shields.io/badge/Node.js-20232A?style=flat-square&logo=nodedotjs&logoColor=339933)](#) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](#) [![Express](https://img.shields.io/badge/Express-20232A?style=flat-square&logo=express&logoColor=white)](#) [![Prisma](https://img.shields.io/badge/Prisma-20232A?style=flat-square&logo=prisma&logoColor=white)](#) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-20232A?style=flat-square&logo=postgresql&logoColor=4169E1)](#) [![JWT](https://img.shields.io/badge/JWT-20232A?style=flat-square&logo=jsonwebtokens&logoColor=white)](#) [![Axios](https://img.shields.io/badge/Axios-20232A?style=flat-square&logo=axios&logoColor=5A29E4)](#) [![Bcrypt](https://img.shields.io/badge/Bcrypt-20232A?style=flat-square&logo=letsencrypt&logoColor=white)](#) [![Cloudinary](https://img.shields.io/badge/Cloudinary-20232A?style=flat-square&logo=cloudinary&logoColor=3448C5)](#) [![CORS](https://img.shields.io/badge/CORS-20232A?style=flat-square&logo=googlechrome&logoColor=white)](#)
