@@ -7,6 +7,7 @@ Final challenge of the Compass internship program. Requirements: authentication,
 ```bash
 npm install
 npm run setup
+npm run dev
 ```
 
 ### Commands
