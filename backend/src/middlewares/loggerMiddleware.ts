@@ -6,8 +6,8 @@ export const requestLogger = (
   next: NextFunction,
 ) => {
   const { method, url } = req;
-  const query = req.query as Record<string, unknown>;
-  const body = req.body as Record<string, unknown>;
+  const query = (req.query as Record<string, unknown>) || {};
+  const body = (req.body as Record<string, unknown>) || {};
   const timestamp = new Date().toISOString();
 
   console.log(`[${timestamp}] ${method} ${url}`);
