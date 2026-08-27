@@ -1,7 +1,7 @@
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import type { Control } from "react-hook-form";
+import { FormField } from "./../shared/ui/Formfield";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -12,74 +12,12 @@ const contactSchema = z.object({
 
 export type ContactFormValues = z.infer<typeof contactSchema>;
 
-interface ContactFormFieldProps {
-  label: string;
-  name: keyof ContactFormValues;
-  control: Control<ContactFormValues>;
-  type?: string;
-  placeholder?: string;
-  multiline?: boolean;
-  error?: string;
-}
-
-function ContactFormField({
-  label,
-  name,
-  control,
-  type = "text",
-  placeholder,
-  multiline = false,
-  error,
-}: ContactFormFieldProps) {
-  return (
-    <div className="w-full">
-      <label
-        htmlFor={name}
-        className="mb-[22px] block font-poppins text-[16px] leading-[100%] font-medium tracking-[0%] text-neutral-800"
-      >
-        {label}
-      </label>
-
-      <Controller
-        name={name}
-        control={control}
-        render={({ field }) =>
-          multiline ? (
-            <textarea
-              {...field}
-              id={name}
-              placeholder={placeholder}
-              className={`h-[75px] w-full resize-none rounded-[10px] border bg-white px-4 py-3 font-poppins text-[16px] leading-[100%] font-normal tracking-[0%] text-neutral-800 placeholder:text-neutral-400 ${error ? "border-red-500" : "border-[#9F9F9F]"}`}
-            />
-          ) : (
-            <input
-              {...field}
-              id={name}
-              type={type}
-              placeholder={placeholder}
-              className={`h-[75px] w-full rounded-[10px] border bg-white px-4 font-poppins text-[16px] leading-[100%] font-normal tracking-[0%] text-neutral-800 placeholder:text-neutral-400 ${error ? "border-red-500" : "border-[#9F9F9F]"}`}
-            />
-          )
-        }
-      />
-
-      {error && (
-        <span className="mt-1 block text-xs text-red-500">{error}</span>
-      )}
-    </div>
-  );
-}
-
 export default function ContactForm({
   onSubmit,
 }: {
   onSubmit: (data: ContactFormValues) => void;
 }) {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ContactFormValues>({
+  const { control, handleSubmit } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
       name: "",
@@ -95,36 +33,36 @@ export default function ContactForm({
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-[32px]"
       >
-        <ContactFormField
+        <FormField<ContactFormValues>
           label="Your name"
           name="name"
           control={control}
           placeholder="Abc"
-          error={errors.name?.message}
         />
 
-        <ContactFormField
+        <FormField<ContactFormValues>
           label="Email address"
           name="email"
           control={control}
           type="email"
           placeholder="Abc@def.com"
-          error={errors.email?.message}
         />
 
-        <ContactFormField
+        <FormField<ContactFormValues>
           label="Subject"
           name="subject"
           control={control}
           placeholder="This is optional"
+          optional
         />
 
-        <ContactFormField
+        <FormField<ContactFormValues>
           label="Message"
           name="message"
           control={control}
+          as="textarea"
           placeholder="Hi! I'd like to ask about"
-          multiline
+          optional
         />
 
         <div className="flex w-full justify-start">
