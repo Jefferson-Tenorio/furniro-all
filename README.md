@@ -45,211 +45,56 @@ Based on my own repository, linked here: https://github.com/Jefferson-Tenorio/ap
 
 # Authentication
 
-<table cellspacing="0" cellpadding="0" border="0" style=" border-collapse: collapse; border-spacing: 0; border: 0; margin: 0; padding: 0; " > <tr style=" border: 0; margin: 0; padding: 0; ">
-
-<td
-  align="center"
-  valign="top"
-  style="
-    border: 0;
-    margin: 0;
-    padding: 0;
-    line-height: 0;
-  "
->
-  <a
-    href="docs/Login.svg"
-    style="
-      margin: 0;
-      padding: 0;
-      border: 0;
-      line-height: 0;
-    "
-  >
-    <img
-      src="docs/Login.svg"
-      width="220"
-      height="300"
-      style="
-        display: block;
-        width: 220px;
-        height: 300px;
-        object-fit: cover;
-        object-position: top;
-        margin: 0;
-        padding: 0;
-        border: 0;
-      "
-    >
-  </a>
-
-  <div style="
-    margin: 0;
-    padding: 0;
-    border: 0;
-    line-height: 1;
-  ">
-    <strong>Login</strong>
-  </div>
-</td>
-
-<td
-  align="center"
-  valign="top"
-  style="
-    border: 0;
-    margin: 0;
-    padding: 0;
-    line-height: 0;
-  "
->
-  <a
-    href="docs/Register.svg"
-    style="
-      margin: 0;
-      padding: 0;
-      border: 0;
-      line-height: 0;
-    "
-  >
-    <img
-      src="docs/Register.svg"
-      width="220"
-      height="300"
-      style="
-        display: block;
-        width: 220px;
-        height: 300px;
-        object-fit: cover;
-        object-position: top;
-        margin: 0;
-        padding: 0;
-        border: 0;
-      "
-    >
-  </a>
-
-  <div style="
-    margin: 0;
-    padding: 0;
-    border: 0;
-    line-height: 1;
-  ">
-    <strong>Register</strong>
-  </div>
-</td>
-
-<td
-  align="center"
-  valign="top"
-  style="
-    border: 0;
-    margin: 0;
-    padding: 0;
-    line-height: 0;
-  "
->
-  <a
-    href="docs/Request.svg"
-    style="
-      margin: 0;
-      padding: 0;
-      border: 0;
-      line-height: 0;
-    "
-  >
-    <img
-      src="docs/Request.svg"
-      width="220"
-      height="300"
-      style="
-        display: block;
-        width: 220px;
-        height: 300px;
-        object-fit: cover;
-        object-position: top;
-        margin: 0;
-        padding: 0;
-        border: 0;
-      "
-    >
-  </a>
-
-  <div style="
-    margin: 0;
-    padding: 0;
-    border: 0;
-    line-height: 1;
-  ">
-    <strong>Request</strong>
-  </div>
-</td>
-
-<td
-  align="center"
-  valign="top"
-  style="
-    border: 0;
-    margin: 0;
-    padding: 0;
-    line-height: 0;
-  "
->
-  <a
-    href="docs/Logout.svg"
-    style="
-      margin: 0;
-      padding: 0;
-      border: 0;
-      line-height: 0;
-    "
-  >
-    <img
-      src="docs/Logout.svg"
-      width="220"
-      height="300"
-      style="
-        display: block;
-        width: 220px;
-        height: 300px;
-        object-fit: cover;
-        object-position: top;
-        margin: 0;
-        padding: 0;
-        border: 0;
-      "
-    >
-  </a>
-
-  <div style="
-    margin: 0;
-    padding: 0;
-    border: 0;
-    line-height: 1;
-  ">
-    <strong>Logout</strong>
-  </div>
-</td>
-
-</tr> </table>
+<table>
+  <tr>
+    <td align="center">
+      <a href="docs/Login.svg">
+        <img src="docs/Login.svg" width="220" height="300" alt="Login screen">
+      </a>
+      <br>
+      <strong>Login</strong>
+    </td>
+    <td align="center">
+      <a href="docs/Register.svg">
+        <img src="docs/Register.svg" width="220" height="300" alt="Register screen">
+      </a>
+      <br>
+      <strong>Register</strong>
+    </td>
+    <td align="center">
+      <a href="docs/Request.svg">
+        <img src="docs/Request.svg" width="220" height="300" alt="Authenticated request screen">
+      </a>
+      <br>
+      <strong>Request</strong>
+    </td>
+    <td align="center">
+      <a href="docs/Logout.svg">
+        <img src="docs/Logout.svg" width="220" height="300" alt="Logout screen">
+      </a>
+      <br>
+      <strong>Logout</strong>
+    </td>
+  </tr>
+</table>
 
 Login generates a JWT signed with HS256, containing `userId`, `username`, a `jti` unique to each token (via `crypto.randomUUID()`), plus the standard expiration, issuer, and audience claims — all validated on verification, not just the signature. The token travels in an HttpOnly cookie with `SameSite=Strict` (mitigating CSRF), and in parallel a copy is mirrored into Zustand and persisted to localStorage, used only for UI reactivity and so the Axios interceptor can build the `Authorization: Bearer` header. In other words, every authenticated request carries the token twice — once automatically via the cookie, once explicitly via the header — which is redundant, but it guarantees the backend accepts both cookie-based and header-based clients without coupling the middleware to a single strategy. Login is rate-limited to 5 attempts per 15 minutes (registration: 100), and logout doesn't just clear local state: the token's `jti` goes into a denylist table along with its expiration, and the authentication middleware checks that table on every request — so a token stolen before logout becomes invalid immediately after, not only once it naturally expires. The open issue is purging that denylist: expired entries aren't removed automatically, so the table grows indefinitely with no cleanup routine.
 
 # Cartsidebar
 
-<img src="docs/cartside.png">
+<img src="docs/cartside.png" alt="Cart sidebar drawer">
 
 This is a drawer controlled from the outside — it receives `isOpen` and `onClose` from `RightMenu` and doesn't manage its own open state. Every piece of data comes from individual `useCartStore` selectors (`items`, `removeItem`, `getSubtotal`), which avoids prop drilling but couples the component to how the store is structured. The animation uses `translate-x` instead of manipulating `right`, which is lighter since it runs on the GPU instead of forcing a reflow. Two decisions are worth noting because they're deliberate trade-offs, not things discovered after the fact: the panel height is fixed in pixels (`746px`), which matches the design exactly but breaks on smaller screens; and the subtotal uses `getSubtotal()`, which ignores discounts — the store has a `getTotal()` that applies discounts, but it isn't used here, creating an inconsistency between the value shown in the sidebar and the actual order total. There's also no focus trap: `aria-modal="true"` is present, but keyboard focus normally escapes the drawer, and there's no Esc-to-close.
 
 # Checkout
 
-<img src="docs/checkout.png">
+<img src="docs/checkout.png" alt="Checkout page">
 
 Eleven address fields live under a single page-level `useForm`, distributed to children via `FormProvider` — a decision that only pays off past a certain field count; for a small form, passing `control` directly would be simpler. The standout feature is CEP (Brazilian ZIP code) auto-fill: on field blur (not on every keystroke, avoiding rate limits on ViaCEP's public API), a request fetches the street, city, and state and populates the corresponding fields via `setValue`, clearing any validation errors already shown. This is deliberately tied to Brazil — there's no fallback for other countries. Payment method selection uses custom buttons controlled by `Controller` instead of native `<input type="radio">`, which gives full visual control but costs accessibility: there's no `role="radio"`, no `aria-checked`, and no arrow-key navigation — the most serious gap documented in the whole flow. The same discount-ignoring issue from the Cart Sidebar repeats here, and the entire submit step is a placeholder: the data goes to `console.log`, the cart is cleared, and the user is redirected after 2 seconds, with no real API call.
 
 # Contact
 
-<img src="docs/contact.png">
+<img src="docs/contact.png" alt="Contact page">
 
 Unlike Checkout, the decision here was not to share form context — `ContactForm` creates its own `useForm` instance, isolated from any parent component, because there's no second form on the same page to justify a shared provider. Even so, it uses the same `FormField` component as Checkout, keeping the visual identity identical between the two without duplicating styles. Validation only requires name and email; subject and message are optional, with no minimum character length and no spam protection at all (no honeypot, no rate limit) — the form accepts repeated programmatic submissions with zero friction. Just like Checkout, there's no real API call: submitting fires a success toast and nothing else, and there's no loading state or button-disable during submission, which leaves room for a double submit on slow connections.
 
