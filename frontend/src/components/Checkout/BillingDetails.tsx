@@ -35,7 +35,9 @@ export default function BillingDetails() {
   const { setValue, clearErrors } = useFormContext<CheckoutFormValues>();
 
   const handleZipCodeBlur = async (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.FocusEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const cep = e.target.value.replace(/\D/g, "");
     if (cep.length !== 8) return;
@@ -67,7 +69,6 @@ export default function BillingDetails() {
           <FormField<CheckoutFormValues>
             key={field.name}
             {...field}
-            // control não é passado: FormField pega via useFormContext
             onBlurInterceptor={
               field.name === "zipCode" ? handleZipCodeBlur : undefined
             }
